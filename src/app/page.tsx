@@ -11,8 +11,7 @@ export default async function Home() {
           <li key={group.id}>
             <p>{group.name}</p>
             <p>{group.description}</p>
-
-            <p>{group.created_at.toString()}</p>
+            <p>{group.facebook}</p>
           </li>
         ))}
       </ul>
