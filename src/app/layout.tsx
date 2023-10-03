@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import { Providers } from "./providers";
 import { ThemeSwitcher } from "./components/ThemeSwitcher";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: [ "latin" ] });
 
@@ -14,11 +15,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="light text-foreground bg-background">
+    <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
         <Providers>
           <div>
-            <ThemeSwitcher />
+            <Navbar />
           </div>
           {children}
         </Providers>

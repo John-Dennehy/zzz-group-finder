@@ -2,11 +2,12 @@
 
 import { NextUIProvider } from '@nextui-org/react'
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ReactNode } from 'react';
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children }: { children: ReactNode }) {
 	return (
 		<NextUIProvider>
-			<NextThemesProvider attribute="class" defaultTheme="dark">
+			<NextThemesProvider attribute="class" defaultTheme="light">
 				{children}
 			</NextThemesProvider>
 		</NextUIProvider>

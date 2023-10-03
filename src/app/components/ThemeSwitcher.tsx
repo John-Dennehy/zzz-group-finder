@@ -1,23 +1,37 @@
 "use client";
 
+import { Switch } from "@nextui-org/switch";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { MoonIcon } from "./MoonIcon";
+import { SunIcon } from "./SunIcon";
 
-export function ThemeSwitcher() {
-	const [ mounted, setMounted ] = useState(false)
-	const { theme, setTheme } = useTheme()
+export function ThemeSwitcher({ children }: { children?: ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const { theme, setTheme } = useTheme();
 
-	useEffect(() => {
-		setMounted(true)
-	}, [])
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-	if (!mounted) return null
+  if (!mounted) return null;
 
-	return (
-		<div>
-			The current theme is: {theme}
-			<button onClick={() => setTheme('light')}>Light Mode</button>
-			<button onClick={() => setTheme('dark')}>Dark Mode</button>
-		</div>
-	)
-};
+  const handleSwitch = () => {
+    setIsDarkMode(!isDarkMode);
+    setTheme(isDarkMode ? "light" : "dark");
+  };
+
+  return (
+    <Switch
+      onValueChange={handleSwitch}
+      defaultSelected
+      size="lg"
+      color="success"
+      startContent={<SunIcon />}
+      endContent={<MoonIcon />}
+    >
+      {children}
+    </Switch>
+  );
+}
