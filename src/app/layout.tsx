@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import { Providers } from "./providers";
+import { ThemeSwitcher } from "./components/ThemeSwitcher";
 
 const inter = Inter({ subsets: [ "latin" ] });
 
@@ -16,6 +17,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className="light text-foreground bg-background">
       <body className={inter.className}>
         <Providers>
+          <div>
+            <ThemeSwitcher />
+          </div>
           {children}
         </Providers>
       </body>
