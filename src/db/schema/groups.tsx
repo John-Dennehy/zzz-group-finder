@@ -1,4 +1,4 @@
-import { InferModel } from "drizzle-orm";
+import { InferSelectModel } from "drizzle-orm";
 import {
   mysqlTableCreator,
   serial,
@@ -22,6 +22,6 @@ export const groups = mysqlTable("groups", {
   deleted_at: timestamp("deleted_at"),
 });
 
-export type Group = InferModel<typeof groups>;
+export type Group = InferSelectModel<typeof groups>;
 
 export default groups;

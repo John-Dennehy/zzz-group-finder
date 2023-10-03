@@ -13,5 +13,6 @@ export const allGroups = await db
     id: groups.id,
     name: groups.name,
     description: groups.description,
+    created_at: groups.created_at,
   })
   .from(groups);
