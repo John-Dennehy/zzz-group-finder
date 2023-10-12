@@ -1,4 +1,4 @@
-import { InferSelectModel } from "drizzle-orm";
+import { InferSelectModel, InferInsertModel } from "drizzle-orm";
 import {
   mysqlTableCreator,
   boolean,
@@ -48,5 +48,6 @@ export const groups = mysqlTable("groups", {
 });
 
 export type Group = InferSelectModel<typeof groups>;
+export type GroupInsert = InferInsertModel<typeof groups>;
 
 export default groups;
