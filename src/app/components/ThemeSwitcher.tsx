@@ -6,9 +6,17 @@ import { ReactNode, useEffect, useState } from "react";
 import { MoonIcon } from "./MoonIcon";
 import { SunIcon } from "./SunIcon";
 
-export function ThemeSwitcher({ children }: { children?: ReactNode }) {
+
+type ThemeSwitcherProps = {
+  defaultSelected?: boolean;
+  children?: ReactNode;
+};
+export function ThemeSwitcher({
+  defaultSelected = false,
+  children,
+}: ThemeSwitcherProps) {
   const [mounted, setMounted] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(defaultSelected);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
