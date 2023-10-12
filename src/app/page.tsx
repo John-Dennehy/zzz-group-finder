@@ -1,4 +1,5 @@
 import { allGroups } from "@/db";
+import { GroupCard } from "@/components/GroupCard";
 
 export default async function Home() {
   const data = await allGroups;
@@ -9,9 +10,7 @@ export default async function Home() {
       <ul>
         {data.map((group) => (
           <li key={group.id}>
-            <p>{group.name}</p>
-            <p>{group.description}</p>
-            <p>{group.facebook}</p>
+            <GroupCard group={group} />
           </li>
         ))}
       </ul>
