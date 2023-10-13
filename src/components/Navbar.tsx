@@ -25,8 +25,11 @@ export default function Navbar() {
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
+      classNames={{
+        wrapper: "container mx-auto max-w-screen-2xl",
+      }}
     >
-      <NavbarContent className="sm:hidden" justify="start">
+      <NavbarContent className="sm:hidden " justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />

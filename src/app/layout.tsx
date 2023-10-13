@@ -18,10 +18,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
         <Providers>
-          <div>
-            <Navbar />
-          </div>
-          {children}
+          <Navbar />
+          <main className="container mx-auto p-6 max-w-screen-2xl">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>

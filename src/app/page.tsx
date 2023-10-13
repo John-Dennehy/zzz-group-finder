@@ -6,7 +6,7 @@ export default async function Home() {
 
   return (
     <main>
-      <p className="text-lg text-blue-600">Hello</p>
+      <p className="text-lg text-primary-400">Hello</p>
       <ul>
         {data.map((group) => (
           <li key={group.id}>
