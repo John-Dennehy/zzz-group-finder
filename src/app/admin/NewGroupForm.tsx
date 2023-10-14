@@ -1,18 +1,15 @@
 "use client";
 
-import {
-  ChangeHandler,
-  SubmitErrorHandler,
-  SubmitHandler,
-} from "react-hook-form";
+import { SubmitErrorHandler, SubmitHandler } from "react-hook-form";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Divider } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { Input, InputProps } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
+import { FormFields, getInputProps } from "./getInputProps";
 
-type Fields = {
+export type Fields = {
   name?: string;
   description?: string;
   logoUrl?: string;
@@ -22,12 +19,11 @@ type Fields = {
   location?: string;
   phone?: string;
   active?: boolean;
-};
-
-const defaultFormProps = {
-  defaultValues: {
-    active: true,
-  },
+  hours?: {
+    weekday: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
+    open: string;
+    close: string;
+  }[];
 };
 
 const defaultInputProps: InputProps = {
@@ -43,11 +39,6 @@ const defaultInputProps: InputProps = {
     description: "text-default-400",
   },
 } as const;
-
-interface FormFields extends InputProps {
-  name: keyof Fields;
-  componentType: "input" | "textarea";
-}
 
 const formFields: FormFields[] = [
   {
@@ -100,38 +91,34 @@ const formFields: FormFields[] = [
     type: "tel",
     label: "Phone",
   },
+  {
+    componentType: "input",
+    name: "active",
+    type: "checkbox",
+    label: "Active",
+  },
+  {
+    componentType: "input",
+    name: "hours",
+    type: "checkbox",
+    label: "Hours",
+  },
 ];
 
-type FormFieldKeys = keyof Fields;
-
 export function NewGroupForm() {
-  const { register, handleSubmit, formState, reset } =
-    useForm<Fields>(defaultFormProps);
+  const { register, handleSubmit, formState, reset } = useForm<Fields>({
+    defaultValues: {
+      active: true,
+    },
+  });
 
-  const inputProps = (fieldName: FormFieldKeys): InputProps => {
-    const fieldProps = formFields.find((field) => field.name === fieldName)!;
-    return {
-      ...defaultInputProps,
-      ...register(fieldName, {
-        required: fieldProps.isRequired ? `${fieldName} is required` : false,
-      }),
-      isInvalid: formState.errors[fieldName] ? true : false,
-      errorMessage: formState.errors[fieldName]?.message,
-      // ...fieldProps,
-      name: fieldName,
-      label: fieldProps.label || fieldName,
-      type: fieldProps.type || "text",
-      placeholder: fieldProps.placeholder,
+  const inputProps = getInputProps(
+    formFields,
+    defaultInputProps,
+    register,
+    formState
+  );
 
-      classNames: {
-        ...defaultInputProps.classNames,
-        ...fieldProps.classNames,
-        label: fieldProps.isRequired
-          ? "after:content-['_*'] after:text-red-500"
-          : null,
-      },
-    };
-  };
   const onValidSubmit: SubmitHandler<Fields> = (data) => {
     console.log("Success: ", data);
     alert("Success");
@@ -153,31 +140,11 @@ export function NewGroupForm() {
 
       <Divider />
       <h2>Contact Details</h2>
-      {/* <Input
-        {...register("website")}
-        {...inputProps}
-        type="url"
-        label="Website"
-      />
-      <Input
-        {...register("facebook")}
-        {...inputProps}
-        type="url"
-        label="Facebook"
-      />
-      <Input
-        {...register("postCode")}
-        {...inputProps}
-        type="text"
-        label="Post Code"
-      />
-      <Textarea
-        {...register("location")}
-        {...inputProps}
-        type="text"
-        label="Location"
-      />
-      <Input {...register("phone")} {...inputProps} type="tel" label="Phone" /> */}
+      <Input {...inputProps("website")} />
+      <Input {...inputProps("facebook")} />
+      <Input {...inputProps("postCode")} />
+      <Textarea {...inputProps("location")} />
+      <Input {...inputProps("phone")} />
       <Divider />
       <Checkbox
         {...register("active", {
