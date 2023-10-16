@@ -17,3 +17,17 @@ export const allGroups = await db
 export async function insertGroup(group: GroupInsert) {
   return db.insert(groups).values(group);
 }
+
+export async function updateGroup(id: string, group: GroupInsert) {
+  return db
+    .update(groups)
+    .set(group)
+    .where(sql`${groups.id} = ${id}`);
+}
+
+export async function deleteGroup(id: string) {
+  return db
+    .update(groups)
+    .set({ deletedAt: new Date() })
+    .where(sql`${groups.id} = ${id}`);
+}
