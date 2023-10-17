@@ -47,5 +47,6 @@ export const groupRelations = relations(groups, ({ many }) => ({
 
 export type Group = InferSelectModel<typeof groups>;
 export type GroupInsert = InferInsertModel<typeof groups>;
+export type GroupUpdate = Partial<GroupInsert>;
 
 export default groups;
