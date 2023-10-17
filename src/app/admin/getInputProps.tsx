@@ -1,5 +1,5 @@
 import { InputProps } from "@nextui-org/react";
-import { Fields } from "./NewGroupForm";
+import { Fields } from "../../components/NewGroupForm";
 import { FormState, UseFormRegister } from "react-hook-form";
 
 export interface FormFields extends InputProps {

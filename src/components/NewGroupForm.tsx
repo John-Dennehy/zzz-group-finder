@@ -7,7 +7,7 @@ import { Button } from "@nextui-org/react";
 import { Input, InputProps } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { FormFields, getInputProps } from "./getInputProps";
+import { FormFields, getInputProps } from "../app/admin/getInputProps";
 
 export type Fields = {
   name?: string;
@@ -134,7 +134,7 @@ export function NewGroupForm() {
       className="flex flex-col flex-wrap md:flex-nowrap md:mb-0 gap-4 "
       onSubmit={handleSubmit(onValidSubmit, onInvalidSubmit)}
     >
-      <Input {...inputProps("name")} />
+      <Input autoFocus {...inputProps("name")} />
       <Textarea {...inputProps("description")} />
       <Input {...inputProps("logoUrl")} />
 
