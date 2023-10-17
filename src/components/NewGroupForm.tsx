@@ -134,17 +134,15 @@ export function NewGroupForm() {
       className="flex flex-col flex-wrap md:flex-nowrap md:mb-0 gap-4 "
       onSubmit={handleSubmit(onValidSubmit, onInvalidSubmit)}
     >
+      <h2>What</h2>
       <Input autoFocus {...inputProps("name")} />
       <Textarea {...inputProps("description")} />
-      <Input {...inputProps("logoUrl")} />
-
       <Divider />
-      <h2>Contact Details</h2>
-      <Input {...inputProps("website")} />
-      <Input {...inputProps("facebook")} />
+      <Input {...inputProps("logoUrl")} />
+      <Divider />
+      <h2>Where</h2>
       <Input {...inputProps("postCode")} />
       <Textarea {...inputProps("location")} />
-      <Input {...inputProps("phone")} />
       <Divider />
       <Checkbox
         {...register("active", {

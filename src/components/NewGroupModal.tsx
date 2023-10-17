@@ -26,7 +26,9 @@ const NewGroupModal = ({}: NewGroupModalProps) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">
+                Add New Group
+              </ModalHeader>
               <ModalBody>
                 <NewGroupForm />
               </ModalBody>
@@ -35,7 +37,7 @@ const NewGroupModal = ({}: NewGroupModalProps) => {
                   Close
                 </Button>
                 <Button color="primary" onPress={onClose}>
-                  Sign in
+                  Submit
                 </Button>
               </ModalFooter>
             </>
