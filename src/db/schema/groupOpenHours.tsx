@@ -17,7 +17,7 @@ import groups from "./groups";
 
 export const groupOpenHours = mysqlTable("group_open_hours", {
   id: serial("id").primaryKey(),
-  groupId: int("group_id").references(() => groups.id),
+  groupId: int("group_id"),
   weekday: mysqlEnum("weekday", [
     "mon",
     "tue",
@@ -29,6 +29,7 @@ export const groupOpenHours = mysqlTable("group_open_hours", {
   ]).notNull(),
   start: time("start").notNull(),
   end: time("end").notNull(),
+  active: boolean("active").notNull().default(true),
 
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
@@ -44,5 +45,6 @@ export const groupOpenHoursRelations = relations(groupOpenHours, ({ one }) => ({
 
 export type GroupOpenHours = InferSelectModel<typeof groupOpenHours>;
 export type GroupOpenHoursInsert = InferInsertModel<typeof groupOpenHours>;
+export type GroupOpenHoursUpdate = Partial<GroupOpenHoursInsert>;
 
 export default groupOpenHours;
