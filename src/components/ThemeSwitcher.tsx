@@ -3,8 +3,8 @@
 import { Switch } from "@nextui-org/switch";
 import { useTheme } from "next-themes";
 import { ReactNode, useEffect, useState } from "react";
-import { MoonIcon } from "./MoonIcon";
-import { SunIcon } from "./SunIcon";
+import { MoonIcon } from "./svg/MoonIcon";
+import { SunIcon } from "./svg/SunIcon";
 
 
 type ThemeSwitcherProps = {

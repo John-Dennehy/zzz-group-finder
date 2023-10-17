@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
-import { AcmeLogo } from "./AcmeLogo";
+import { AcmeLogo } from "./svg/AcmeLogo";
 import { useState } from "react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
