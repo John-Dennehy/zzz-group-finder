@@ -1,8 +1,8 @@
-import { allGroups } from "@/db";
+import { allActiveGroups } from "@/db";
 import { GroupCard } from "@/components/GroupCard";
 
 export default async function Home() {
-  const data = await allGroups;
+  const data = await allActiveGroups;
 
   return (
     <main>
