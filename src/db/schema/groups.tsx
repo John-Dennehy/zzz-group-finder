@@ -14,19 +14,16 @@ import {
 } from "drizzle-orm/mysql-core";
 import groupOpenHours from "./groupOpenHours";
 import groupsToAttendeeTypes from "./groupsToAttendeeTypes";
+import groupContactDetails from "./groupContactDetails";
 
 export const groups = mysqlTable("groups", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
-  logoUrl: varchar("logo_url", { length: 256 }),
   description: text("description"),
+  logoUrl: varchar("logo_url", { length: 256 }),
 
   address: varchar("where", { length: 256 }),
   postCode: varchar("post_code", { length: 256 }).notNull(),
-  url: varchar("url", { length: 256 }),
-  phone: varchar("phone", { length: 256 }),
-  email: varchar("email", { length: 256 }),
-  facebook: varchar("facebook", { length: 256 }),
 
   verifiedAt: timestamp("verified_at"),
   active: boolean("active").default(true).notNull(),
@@ -43,6 +40,7 @@ export const groups = mysqlTable("groups", {
 export const groupRelations = relations(groups, ({ many }) => ({
   groupOpenHours: many(groupOpenHours),
   groupsToAttendeeTypes: many(groupsToAttendeeTypes),
+  groupContactDetails: many(groupContactDetails),
 }));
 
 export type Group = InferSelectModel<typeof groups>;
