@@ -17,6 +17,24 @@ export const groupfinderAttendeeTypes = mysqlTable("groupfinder_attendee_types",
 	}
 });
 
+export const groupfinderGroupContactDetails = mysqlTable("groupfinder_group_contact_details", {
+	id: serial("id").notNull(),
+	groupId: int("group_id"),
+	contactType: mysqlEnum("contact_type", ['email','phone','text','facebook','website','whatsapp']).notNull(),
+	contactValue: varchar("contact_value", { length: 255 }).notNull(),
+	forInformation: tinyint("for_information").default(1).notNull(),
+	forBooking: tinyint("for_booking").default(0).notNull(),
+	active: tinyint("active").default(1).notNull(),
+	createdAt: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
+	updatedAt: timestamp("updated_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
+	deletedAt: timestamp("deleted_at", { mode: 'string' }),
+},
+(table) => {
+	return {
+		groupfinderGroupContactDetailsId: primaryKey(table.id),
+	}
+});
+
 export const groupfinderGroupOpenHours = mysqlTable("groupfinder_group_open_hours", {
 	id: serial("id").notNull(),
 	groupId: int("group_id"),
@@ -26,6 +44,7 @@ export const groupfinderGroupOpenHours = mysqlTable("groupfinder_group_open_hour
 	createdAt: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
 	updatedAt: timestamp("updated_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
 	deletedAt: timestamp("deleted_at", { mode: 'string' }),
+	active: tinyint("active").default(1).notNull(),
 },
 (table) => {
 	return {
@@ -38,12 +57,8 @@ export const groupfinderGroups = mysqlTable("groupfinder_groups", {
 	name: varchar("name", { length: 256 }).notNull(),
 	logoUrl: varchar("logo_url", { length: 256 }),
 	description: text("description"),
-	where: varchar("where", { length: 256 }),
-	postCode: varchar("post_code", { length: 256 }),
-	url: varchar("url", { length: 256 }),
-	phone: varchar("phone", { length: 256 }),
-	email: varchar("email", { length: 256 }),
-	facebook: varchar("facebook", { length: 256 }),
+	address: varchar("address", { length: 256 }).notNull(),
+	postCode: varchar("post_code", { length: 256 }).notNull(),
 	verifiedAt: timestamp("verified_at", { mode: 'string' }),
 	active: tinyint("active").default(1).notNull(),
 	createdAt: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),

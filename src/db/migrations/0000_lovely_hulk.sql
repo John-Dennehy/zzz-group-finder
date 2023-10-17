@@ -12,6 +12,20 @@ CREATE TABLE `groupfinder_attendee_types` (
 	CONSTRAINT `groupfinder_attendee_types_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
+CREATE TABLE `groupfinder_group_contact_details` (
+	`id` serial AUTO_INCREMENT NOT NULL,
+	`group_id` int,
+	`contact_type` enum('email','phone','text','facebook','website','whatsapp') NOT NULL,
+	`contact_value` varchar(255) NOT NULL,
+	`for_information` tinyint NOT NULL DEFAULT 1,
+	`for_booking` tinyint NOT NULL DEFAULT 0,
+	`active` tinyint NOT NULL DEFAULT 1,
+	`created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+	`deleted_at` timestamp,
+	CONSTRAINT `groupfinder_group_contact_details_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
 CREATE TABLE `groupfinder_group_open_hours` (
 	`id` serial AUTO_INCREMENT NOT NULL,
 	`group_id` int,
@@ -21,6 +35,7 @@ CREATE TABLE `groupfinder_group_open_hours` (
 	`created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
 	`updated_at` timestamp DEFAULT CURRENT_TIMESTAMP,
 	`deleted_at` timestamp,
+	`active` tinyint NOT NULL DEFAULT 1,
 	CONSTRAINT `groupfinder_group_open_hours_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -29,12 +44,8 @@ CREATE TABLE `groupfinder_groups` (
 	`name` varchar(256) NOT NULL,
 	`logo_url` varchar(256),
 	`description` text,
-	`where` varchar(256),
-	`post_code` varchar(256),
-	`url` varchar(256),
-	`phone` varchar(256),
-	`email` varchar(256),
-	`facebook` varchar(256),
+	`address` varchar(256) NOT NULL,
+	`post_code` varchar(256) NOT NULL,
 	`verified_at` timestamp,
 	`active` tinyint NOT NULL DEFAULT 1,
 	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -71,6 +71,97 @@
       "foreignKeys": {},
       "uniqueConstraints": {}
     },
+    "groupfinder_group_contact_details": {
+      "name": "groupfinder_group_contact_details",
+      "columns": {
+        "id": {
+          "autoincrement": true,
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "group_id": {
+          "autoincrement": false,
+          "name": "group_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contact_type": {
+          "autoincrement": false,
+          "name": "contact_type",
+          "type": "enum('email','phone','text','facebook','website','whatsapp')",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contact_value": {
+          "autoincrement": false,
+          "name": "contact_value",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "for_information": {
+          "default": 1,
+          "autoincrement": false,
+          "name": "for_information",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "for_booking": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "for_booking",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "active": {
+          "default": 1,
+          "autoincrement": false,
+          "name": "active",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "default": "CURRENT_TIMESTAMP",
+          "autoincrement": false,
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "default": "CURRENT_TIMESTAMP",
+          "autoincrement": false,
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deleted_at": {
+          "autoincrement": false,
+          "name": "deleted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "groupfinder_group_contact_details_id": {
+          "name": "groupfinder_group_contact_details_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
     "groupfinder_group_open_hours": {
       "name": "groupfinder_group_open_hours",
       "columns": {
@@ -131,6 +222,14 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
+        },
+        "active": {
+          "default": 1,
+          "autoincrement": false,
+          "name": "active",
+          "type": "tinyint",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "compositePrimaryKeys": {
@@ -176,47 +275,19 @@
           "primaryKey": false,
           "notNull": false
         },
-        "where": {
+        "address": {
           "autoincrement": false,
-          "name": "where",
+          "name": "address",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "post_code": {
           "autoincrement": false,
           "name": "post_code",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": false
-        },
-        "url": {
-          "autoincrement": false,
-          "name": "url",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "phone": {
-          "autoincrement": false,
-          "name": "phone",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "email": {
-          "autoincrement": false,
-          "name": "email",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "facebook": {
-          "autoincrement": false,
-          "name": "facebook",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "verified_at": {
           "autoincrement": false,
