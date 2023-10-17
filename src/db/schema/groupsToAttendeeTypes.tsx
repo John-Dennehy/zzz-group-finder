@@ -11,8 +11,8 @@ import attendeeTypes from "./attendeeTypes";
 
 export const groupsToAttendeeTypes = mysqlTable("groups_to_attendee_types", {
   id: serial("id").primaryKey(),
-  groupId: int("group_id").references(() => groups.id),
-  attendeeTypeId: int("attendee_type_id").references(() => attendeeTypes.id),
+  groupId: int("group_id"),
+  attendeeTypeId: int("attendee_type_id"),
 
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
   updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
