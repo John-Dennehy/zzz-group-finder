@@ -31,5 +31,6 @@ export const attendeeTypeRelations = relations(attendeeTypes, ({ many }) => ({
 
 export type AttendeeType = InferSelectModel<typeof attendeeTypes>;
 export type AttendeeTypeInsert = InferInsertModel<typeof attendeeTypes>;
+export type AttendeeTypeUpdate = Partial<AttendeeTypeInsert>;
 
 export default attendeeTypes;
