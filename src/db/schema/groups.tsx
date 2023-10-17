@@ -22,7 +22,7 @@ export const groups = mysqlTable("groups", {
   description: text("description"),
   logoUrl: varchar("logo_url", { length: 256 }),
 
-  address: varchar("where", { length: 256 }),
+  address: varchar("address", { length: 256 }).notNull(),
   postCode: varchar("post_code", { length: 256 }).notNull(),
 
   verifiedAt: timestamp("verified_at"),
