@@ -1,16 +1,19 @@
-import { allActiveGroups } from "@/db";
 import { GroupCard } from "@/components/GroupCard";
+import { getAllActiveGroups } from "@/db/queries";
 
 export default async function Home() {
-  const data = await allActiveGroups;
+  const data = getAllActiveGroups;
+
+  const groups = await data.map((group) => {
+    return { ...group };
+  });
 
   return (
     <main>
-      <p className="text-lg text-primary-400">Hello</p>
-      <ul>
-        {data.map((group) => (
-          <li key={group.id}>
-            <GroupCard group={group} />
+      <ul className="flex flex-col gap-4 lg:flex-row lg:flex-wrap lg:justify-center">
+        {groups.map((group) => (
+          <li key={group.id} className="lg:w-[48%]">
+            <GroupCard {...group} />
           </li>
         ))}
       </ul>

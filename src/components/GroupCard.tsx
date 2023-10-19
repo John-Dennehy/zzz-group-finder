@@ -35,7 +35,7 @@ export function GroupCard({
   return (
     <Card
       isBlurred
-      className=" border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+      className=" border-none bg-background/60 dark:bg-default-100/50  flex-grow h-full"
       shadow="sm"
     >
       <CardHeader className="flex flex-col">
