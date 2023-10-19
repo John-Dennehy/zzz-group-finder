@@ -5,7 +5,13 @@ export default async function Home() {
   const data = getAllActiveGroups;
 
   const groups = await data.map((group) => {
-    return { ...group };
+
+    const attendeeTypes = group.groupsToAttendeeTypes.map((item) => {
+      const attendeeType = item.attendeeType;
+
+      return { ...attendeeType };
+    });
+    return { ...group, attendeeTypes };
   });
 
   return (

@@ -4,8 +4,9 @@ import { Location } from "./Location";
 import { Divider } from "@nextui-org/divider";
 import { TimeRange } from "./TimeRange";
 import formatDate from "@/lib/formatDate";
-import { GroupContactDetails, GroupOpenHours } from "@/db/schema";
+import { AttendeeType, GroupContactDetails, GroupOpenHours } from "@/db/schema";
 import { ContactDetails } from "./ContactDetails";
+import { Tooltip } from "@nextui-org/tooltip";
 
 type GroupCardProps = {
   name: string;
@@ -18,6 +19,7 @@ type GroupCardProps = {
   updatedAt?: string | null | Date;
   groupOpenHours: GroupOpenHours[];
   groupContactDetails: GroupContactDetails[];
+  attendeeTypes: AttendeeType[];
 };
 
 export function GroupCard({
@@ -31,6 +33,7 @@ export function GroupCard({
   updatedAt,
   groupOpenHours,
   groupContactDetails,
+  attendeeTypes,
 }: GroupCardProps) {
   return (
     <Card
@@ -46,9 +49,19 @@ export function GroupCard({
       </CardHeader>
       <CardBody className="flex flex-col gap-1 p-3">
         <p className="text-left">{description}</p>
-        {logoUrl && (
+        {/* {logoUrl && (
           <NextImage width={50} height={50} alt="logo" src={logoUrl} />
-        )}
+        )} */}
+        <p>Group is suitable for:</p>
+        <ul className="list-inside list-disc">
+          {attendeeTypes.map((attendeeType) => (
+            <li key={attendeeType.id} className="">
+              <Tooltip content={attendeeType.description}>
+                <span>{attendeeType.name}</span>
+              </Tooltip>
+            </li>
+          ))}
+        </ul>
         <Divider />
         <Location address={address} postCode={postCode} />
         <Divider />
