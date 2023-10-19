@@ -1,12 +1,18 @@
+import capitalise from "@/lib/capitalise";
 import formatTime from "@/lib/formatTime";
-import { TimeRangeProps } from "./Schedule";
 
-export function TimeRange({ startTime, endTime, weekday }: TimeRangeProps) {
-  if (!startTime || !endTime) {
+export type TimeRangeProps = {
+  start: string;
+  end: string;
+  weekday: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
+};
+
+export function TimeRange({ start, end, weekday }: TimeRangeProps) {
+  if (!start || !end) {
     return null;
   }
 
-  const formattedTime = `${formatTime(startTime)} - ${formatTime(endTime)}`;
+  const formattedTime = `${formatTime(start)} - ${formatTime(end)}`;
 
-  return <p>{`${weekday}: ${formattedTime}`}</p>;
+  return <p>{`${capitalise(weekday)}: ${formattedTime}`}</p>;
 }
