@@ -7,7 +7,6 @@ type ContactDetailsProps = {
 export function ContactDetails({ groupContactDetails }: ContactDetailsProps) {
   return (
     <>
-      <h3 className="text-left text-lg">Contact Details:</h3>
       <ul className="flex flex-col gap-1">
         {groupContactDetails.map((contact) => {
           const { id, contactType, contactValue, forInformation, forBooking } =
@@ -22,10 +21,7 @@ export function ContactDetails({ groupContactDetails }: ContactDetailsProps) {
             return (
               <li key={id} className="flex flex-row items-center h-6 gap-1">
                 <p>Email </p>
-                <Link>
-                  <a href={`mailto:${contactValue}`}>{contactValue}</a>
-                </Link>
-                {contactTypeString}
+                <Link href={`mailto:${contactValue}`}>{contactValue}</Link>
               </li>
             );
           }
@@ -34,10 +30,7 @@ export function ContactDetails({ groupContactDetails }: ContactDetailsProps) {
             return (
               <li key={id} className="flex flex-row items-center h-6 gap-1">
                 <p>Phone </p>
-                <Link>
-                  <a href={`tel:${contactValue}`}>{contactValue}</a>
-                </Link>
-                {contactTypeString}
+                <Link href={`tel:${contactValue}`}>{contactValue}</Link>
               </li>
             );
           }
@@ -45,6 +38,8 @@ export function ContactDetails({ groupContactDetails }: ContactDetailsProps) {
           if (contactType === "website" || contactType === "facebook") {
             // handle prefixing with https:// if not already present
             let prefixString = "https://";
+            let contactValue = contact.contactValue;
+
             if (contactValue.includes("https://")) {
               contactValue.replace("https://", "");
             }
@@ -55,13 +50,9 @@ export function ContactDetails({ groupContactDetails }: ContactDetailsProps) {
 
             return (
               <li key={id} className="flex flex-row items-center h-6 gap-1">
-                <p>Visit </p>
-                <Link>
-                  <a href={`${prefixString}${contactValue}`} target="_blank">
-                    {contactValue}
-                  </a>
+                <Link href={`${prefixString}${contactValue}`} target="_blank">
+                  {contactValue}
                 </Link>
-                {contactTypeString}
               </li>
             );
           }
