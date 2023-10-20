@@ -7,6 +7,7 @@ import formatDate from "@/lib/formatDate";
 import { AttendeeType, GroupContactDetails, GroupOpenHours } from "@/db/schema";
 import { ContactDetails } from "./ContactDetails";
 import { Tooltip } from "@nextui-org/tooltip";
+import { Chip } from "@nextui-org/chip";
 
 type GroupCardProps = {
   name: string;
@@ -42,41 +43,48 @@ export function GroupCard({
       shadow="sm"
     >
       <CardHeader className="flex flex-col">
-        <h2 className="text-xl text-primary text-left w-full">
+        <h2 className="flex-row text-xl font-bold text-primary text-left w-full">
           {name}
           {!active && " (currently inactive)"}
         </h2>
+        <Location address={address} postCode={postCode} />
       </CardHeader>
-      <CardBody className="flex flex-col gap-1 p-3">
-        <p className="text-left">{description}</p>
+      <CardBody className="flex flex-col gap-2 p-3">
         {/* {logoUrl && (
           <NextImage width={50} height={50} alt="logo" src={logoUrl} />
         )} */}
-        <p>Group is suitable for:</p>
-        <ul className="list-inside list-disc">
-          {attendeeTypes.map((attendeeType) => (
-            <li key={attendeeType.id} className="">
-              <Tooltip content={attendeeType.description}>
-                <span>{attendeeType.name}</span>
-              </Tooltip>
-            </li>
-          ))}
-        </ul>
-        <Divider />
-        <Location address={address} postCode={postCode} />
+        <div className="flex flex-row gap-2">
+          <ul className="flex flex-row gap-2">
+            {attendeeTypes.map((attendeeType) => (
+              <li key={attendeeType.id} className="">
+                {attendeeType.description && (
+                  <Tooltip content={attendeeType.description}>
+                    <Chip>{attendeeType.name}</Chip>
+                  </Tooltip>
+                )}
+                {!attendeeType.description && <Chip>{attendeeType.name}</Chip>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <Divider />
         <div className="flex flex-col gap-1">
-          <h3 className="text-left text-lg">Schedule:</h3>
           {groupOpenHours.map((openHour) => (
             <TimeRange
               key={openHour.weekday}
               weekday={openHour.weekday}
               start={openHour.start}
               end={openHour.end}
+              description={openHour.description}
             />
           ))}
+          {groupOpenHours.length === 0 && (
+            <p className="text-left">No groups currently scheduled</p>
+          )}
         </div>
         <Divider />
+        <p className="text-left">{description}</p>
         <ContactDetails
           groupContactDetails={groupContactDetails}
         ></ContactDetails>
