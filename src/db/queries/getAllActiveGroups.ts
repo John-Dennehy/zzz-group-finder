@@ -53,6 +53,7 @@ export const getAllActiveGroups = await db.query.groups.findMany({
         weekday: true,
         start: true,
         end: true,
+        description: true,
         updatedAt: true,
       },
     },
