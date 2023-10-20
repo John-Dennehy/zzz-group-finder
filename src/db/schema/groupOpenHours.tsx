@@ -12,6 +12,7 @@ import {
   serial,
   time,
   timestamp,
+  varchar,
 } from "drizzle-orm/mysql-core";
 import groups from "./groups";
 
@@ -29,6 +30,7 @@ export const groupOpenHours = mysqlTable("group_open_hours", {
   ]).notNull(),
   start: time("start").notNull(),
   end: time("end").notNull(),
+  description: varchar("description", { length: 255 }),
   active: boolean("active").notNull().default(true),
 
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
