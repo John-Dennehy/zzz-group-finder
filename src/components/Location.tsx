@@ -16,8 +16,7 @@ export function Location({ address, postCode }: LocationProps) {
   if (postCode) formattedAddress += `${postCode}`;
 
   return (
-    <div className="flex gap-2">
-      <h3>Location</h3>
+    <div className="flex gap-2 text-left  w-full">
       <Link
         className="text-primary"
         href={href}
