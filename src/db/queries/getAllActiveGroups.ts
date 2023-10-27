@@ -7,6 +7,7 @@ export const getAllActiveGroups = await db.query.groups.findMany({
   columns: {
     id: true,
     name: true,
+    logoUrl: true,
     description: true,
     postCode: true,
     address: true,
@@ -60,4 +61,5 @@ export const getAllActiveGroups = await db.query.groups.findMany({
   },
 });
 
+export type GetAllActiveGroups = typeof getAllActiveGroups;
 export default getAllActiveGroups;

@@ -1,5 +1,6 @@
 import nextuiPlugin from "./src/lib/nextui";
 
+
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [

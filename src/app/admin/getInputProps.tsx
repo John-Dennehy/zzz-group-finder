@@ -1,19 +1,20 @@
+import { GroupInsert } from "@/db/schema/groups";
 import { InputProps } from "@nextui-org/react";
-import { Fields } from "../../components/NewGroupForm";
+
 import { FormState, UseFormRegister } from "react-hook-form";
 
 export interface FormFields extends InputProps {
-  name: keyof Fields;
+  name: keyof GroupInsert;
   componentType: "input" | "textarea";
 }
 
 export function getInputProps(
   formFields: FormFields[],
   defaultInputProps: InputProps,
-  register: UseFormRegister<Fields>,
-  formState: FormState<Fields>
+  register: UseFormRegister<GroupInsert>,
+  formState: FormState<GroupInsert>
 ) {
-  return (fieldName: keyof Fields): InputProps => {
+  return (fieldName: keyof GroupInsert): InputProps => {
     const fieldProps = formFields.find((field) => field.name === fieldName)!;
 
     return {
