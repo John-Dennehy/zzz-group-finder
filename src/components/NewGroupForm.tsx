@@ -8,23 +8,8 @@ import { Input, InputProps } from "@nextui-org/react";
 import { Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { FormFields, getInputProps } from "../app/admin/getInputProps";
-
-export type Fields = {
-  name?: string;
-  description?: string;
-  logoUrl?: string;
-  website?: string;
-  facebook?: string;
-  postCode?: string;
-  location?: string;
-  phone?: string;
-  active?: boolean;
-  hours?: {
-    weekday: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
-    open: string;
-    close: string;
-  }[];
-};
+import { GroupInsert } from "@/db/schema";
+import { type } from "os";
 
 const defaultInputProps: InputProps = {
   size: "md",
@@ -53,7 +38,7 @@ const formFields: FormFields[] = [
     componentType: "textarea",
     name: "description",
     label: "Description",
-    isRequired: true,
+    isRequired: false,
   },
   {
     componentType: "input",
@@ -63,50 +48,33 @@ const formFields: FormFields[] = [
   },
   {
     componentType: "input",
-    name: "website",
-    type: "url",
-    label: "Website",
-  },
-  {
-    componentType: "input",
-    name: "facebook",
-    type: "url",
-    label: "Facebook",
-  },
-  {
-    componentType: "input",
     name: "postCode",
     type: "text",
     label: "Post Code",
+    isRequired: true,
   },
   {
     componentType: "input",
-    name: "location",
+    name: "address",
     type: "text",
-    label: "Location",
-  },
-  {
-    componentType: "input",
-    name: "phone",
-    type: "tel",
-    label: "Phone",
+    label: "Where",
+    isRequired: true,
   },
   {
     componentType: "input",
     name: "active",
     type: "checkbox",
     label: "Active",
-  },
-  {
-    componentType: "input",
-    name: "hours",
-    type: "checkbox",
-    label: "Hours",
+    isRequired: true,
   },
 ];
 
-export function NewGroupForm() {
-  const { register, handleSubmit, formState, reset } = useForm<Fields>({
+type NewGroupFormProps = {
+  insertCallback: (data: GroupInsert) => void;
+};
+
+export function NewGroupForm({ insertCallback }: NewGroupFormProps) {
+  const { register, handleSubmit, formState, reset } = useForm<GroupInsert>({
     defaultValues: {
       active: true,
     },
@@ -118,14 +86,18 @@ export function NewGroupForm() {
     register,
     formState
   );
+  // const handleDbInsert = async (data: GroupInsert) => {
+  //   await insertGroup(data);
+  // };
 
-  const onValidSubmit: SubmitHandler<Fields> = (data) => {
+  const onValidSubmit: SubmitHandler<GroupInsert> = (data) => {
+    insertCallback(data);
     console.log("Success: ", data);
     alert("Success");
     reset();
   };
 
-  const onInvalidSubmit: SubmitErrorHandler<Fields> = (data) => {
+  const onInvalidSubmit: SubmitErrorHandler<GroupInsert> = (data) => {
     console.log("error: ", data);
   };
 
@@ -142,7 +114,7 @@ export function NewGroupForm() {
       <Divider />
       <h2>Where</h2>
       <Input {...inputProps("postCode")} />
-      <Textarea {...inputProps("location")} />
+      <Textarea {...inputProps("address")} />
       <Divider />
       <Checkbox
         {...register("active", {

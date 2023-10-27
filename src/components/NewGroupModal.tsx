@@ -12,9 +12,8 @@ import {
 import React from "react";
 import { NewGroupForm } from "./NewGroupForm";
 
-interface NewGroupModalProps {}
 
-const NewGroupModal = ({}: NewGroupModalProps) => {
+export const NewGroupModal = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
@@ -22,7 +21,7 @@ const NewGroupModal = ({}: NewGroupModalProps) => {
       <Button onPress={onOpen} color="primary">
         New Group
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
         <ModalContent>
           {(onClose) => (
             <>
@@ -30,7 +29,7 @@ const NewGroupModal = ({}: NewGroupModalProps) => {
                 Add New Group
               </ModalHeader>
               <ModalBody>
-                <NewGroupForm />
+                <NewGroupForm insertCallback={(onClose) => {}} />
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>

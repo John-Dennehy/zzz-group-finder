@@ -1,75 +1,92 @@
 import NextImage from "next/image";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Location } from "./Location";
-import { Divider } from "@nextui-org/divider";
 import { TimeRange } from "./TimeRange";
 import formatDate from "@/lib/formatDate";
-import { AttendeeType, GroupContactDetails, GroupOpenHours } from "@/db/schema";
+import {
+  AttendeeType,
+  GroupContactDetails,
+  GroupOpenHours,
+  GroupsToAttendeeTypes,
+  Group,
+} from "@/db/schema";
 import { ContactDetails } from "./ContactDetails";
 import { Tooltip } from "@nextui-org/tooltip";
 import { Chip } from "@nextui-org/chip";
+import { Image } from "@nextui-org/image";
+import { GetAllActiveGroups, getAllActiveGroups } from "@/db/queries";
 
-type GroupCardProps = {
-  name: string;
-  logoUrl?: string;
-  description?: string | null;
-  address: string;
-  postCode: string;
-  active: boolean;
-  verifiedAt?: string | null | Date;
-  updatedAt?: string | null | Date;
-  groupOpenHours: GroupOpenHours[];
-  groupContactDetails: GroupContactDetails[];
-  attendeeTypes: AttendeeType[];
-};
+type ActiveGroup = ArrayElement<GetAllActiveGroups>;
 
+type ArrayElement<ArrayType extends readonly unknown[]> =
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+
+export interface AttendeeTypeDetails
+  extends Partial<Pick<AttendeeType, "name" | "description" | "active">> {
+  id: string | number | null;
+}
+
+interface GroupCardProps extends ActiveGroup {
+  attendeeTypeDetails: AttendeeTypeDetails[];
+}
 export function GroupCard({
   name,
   logoUrl,
-  active,
   description,
   address,
   postCode,
-  verifiedAt,
-  updatedAt,
-  groupOpenHours,
   groupContactDetails,
-  attendeeTypes,
+  groupOpenHours,
+  active,
+  updatedAt,
+  verifiedAt,
+  attendeeTypeDetails,
 }: GroupCardProps) {
   return (
-    <Card
-      isBlurred
-      className=" border-none bg-background/60 dark:bg-default-100/50  flex-grow h-full"
-      shadow="sm"
-    >
-      <CardHeader className="flex flex-col">
-        <h2 className="flex-row text-xl font-bold text-primary text-left w-full">
-          {name}
-          {!active && " (currently inactive)"}
-        </h2>
-        <Location address={address} postCode={postCode} />
-      </CardHeader>
-      <CardBody className="flex flex-col gap-2 p-3">
-        {/* {logoUrl && (
-          <NextImage width={50} height={50} alt="logo" src={logoUrl} />
-        )} */}
-        <div className="flex flex-row gap-2">
-          <ul className="flex flex-row gap-2">
-            {attendeeTypes.map((attendeeType) => (
-              <li key={attendeeType.id} className="">
-                {attendeeType.description && (
-                  <Tooltip content={attendeeType.description}>
-                    <Chip>{attendeeType.name}</Chip>
-                  </Tooltip>
-                )}
-                {!attendeeType.description && <Chip>{attendeeType.name}</Chip>}
-              </li>
-            ))}
-          </ul>
-        </div>
+    <Card className="border-separate bg-foreground-50 border-secondary-500 drop-shadow-xl h-full">
+      <CardHeader className="flex bg-secondary-600 h-32 md:h-24 gap-2 w-full h-full flex-row justify-between">
+        <div className="flex flex-col gap-1 ">
+          <h2 className="text-xl font-bold text-foreground-50 text-left">
+            <span className="truncate ">{name}</span>
+            {!active && " (currently inactive)"}
+          </h2>
 
-        <Divider />
-        <div className="flex flex-col gap-1">
+          <div className="flex flex-row gap-2">
+            <ul className="flex flex-row flex-wrap  gap-2">
+              {attendeeTypeDetails.map((attendee) => (
+                <li key={attendee.id} className="">
+                  {attendee.description && (
+                    <Tooltip content={attendee.description}>
+                      <Chip className="bg-primary-600 text-foreground-50">
+                        {attendee.name}
+                      </Chip>
+                    </Tooltip>
+                  )}
+                  {!attendee.description && (
+                    <Chip className="bg-primary-600 text-foreground-50">
+                      {attendee.name}
+                    </Chip>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        {logoUrl && (
+          <Image
+            as={NextImage}
+            src={logoUrl}
+            alt={`${name} logo`}
+            width={60}
+            height={60}
+            radius="sm"
+          />
+        )}
+      </CardHeader>
+      <CardBody className="flex flex-col justify-between gap-4  p-3">
+        <Location address={address} postCode={postCode} />
+
+        <div className="flex flex-col gap-1 h-full">
           {groupOpenHours.map((openHour) => (
             <TimeRange
               key={openHour.weekday}
@@ -83,11 +100,10 @@ export function GroupCard({
             <p className="text-left">No groups currently scheduled</p>
           )}
         </div>
-        <Divider />
-        <p className="text-left">{description}</p>
-        <ContactDetails
-          groupContactDetails={groupContactDetails}
-        ></ContactDetails>
+        <div className="flex flex-col gap-4">
+          <p className="text-left">{description}</p>
+          <ContactDetails groupContactDetails={groupContactDetails} />
+        </div>
       </CardBody>
       <CardFooter className="flex flex-col gap-1 items-end">
         <p className="text-foreground-500 text-xs ">

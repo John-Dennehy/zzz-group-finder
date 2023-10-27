@@ -1,4 +1,5 @@
 import { Link } from "@nextui-org/link";
+import { Button } from "@nextui-org/button";
 
 type LocationProps = {
   address: string | null;
@@ -11,20 +12,25 @@ export function Location({ address, postCode }: LocationProps) {
   if (address) href += `${address}, `;
   if (postCode) href += `${postCode}`;
 
-  let formattedAddress = "";
-  if (address) formattedAddress += `${address}, `;
-  if (postCode) formattedAddress += `${postCode}`;
+  const formatLocation = (address: string | null, postCode: string | null) => {
+    if (!address && !postCode) return null;
+    if (address && !postCode) return address;
+    if (!address && postCode) return postCode;
+    return `${address}, ${postCode}`;
+  };
 
   return (
-    <div className="flex gap-2 text-left  w-full">
-      <Link
-        className="text-primary"
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-      >
-        {formattedAddress}
-      </Link>
-    </div>
+    <Button
+      as={Link}
+      isExternal
+      href={href}
+      showAnchorIcon
+      isBlock
+      size="md"
+      color="warning"
+      className="w-full min-h-unit-8 "
+    >
+      <p className="truncate">{formatLocation(address, postCode)}</p>
+    </Button>
   );
 }
