@@ -1,4 +1,3 @@
-import capitalise from "@/lib/capitalise";
 import formatTime from "@/lib/formatTime";
 import { Chip } from "@nextui-org/chip";
 
@@ -24,7 +23,7 @@ export function TimeRange({
 
   return (
     <div className="flex gap-2">
-      <h4 className="w-12 font-bold">{capitalise(weekday)}:</h4>
+      <h4 className="w-12 font-bold capitalize">{weekday}:</h4>
       <div className="flex gap-2">
         <p>{formattedTime}</p>
         {description && (

@@ -39,6 +39,7 @@ export const getAllActiveGroups = await db.query.groups.findMany({
         return and(isNull(fields.deletedAt), eq(fields.active, true));
       },
       columns: {
+        id: true,
         contactType: true,
         contactValue: true,
         forBooking: true,

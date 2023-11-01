@@ -7,6 +7,7 @@ import {
   PiGlobeSimpleDuotone,
 } from "react-icons/pi";
 type ContactDetails = {
+  id: string | number;
   contactType: "email" | "phone" | "text" | "facebook" | "website" | "whatsapp";
   contactValue: string;
   forInformation: boolean;
