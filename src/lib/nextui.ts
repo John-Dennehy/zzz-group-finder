@@ -13,7 +13,7 @@ const colors: ColorScale = {
   "900": "hsl(144, 61%, 20%)",
 };
 
-const config: NextUIPluginConfig = {
+const nextUiConfig: NextUIPluginConfig = {
   prefix: "nextui",
   addCommonColors: false,
   defaultTheme: "light",
@@ -43,6 +43,5 @@ const config: NextUIPluginConfig = {
   },
 };
 
-const nextuiPlugin = nextui(config);
-
+export const nextuiPlugin = nextui(nextUiConfig);
 export default nextuiPlugin;
