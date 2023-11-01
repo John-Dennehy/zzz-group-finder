@@ -16,12 +16,16 @@ import groupsToAttendeeTypes from "./groupsToAttendeeTypes";
 
 export const attendeeTypes = mysqlTable("attendee_types", {
   id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }),
+  name: varchar("name", { length: 256 }).notNull(),
   description: text("description"),
-  active: boolean("active"),
+  active: boolean("active").notNull(),
 
-  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: timestamp("updated_at").default(sql`CURRENT_TIMESTAMP`),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
   deletedAt: timestamp("deleted_at"),
 });
 
