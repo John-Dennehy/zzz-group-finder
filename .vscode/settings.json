@@ -2,8 +2,10 @@
   "cSpell.words": [
     "datetime",
     "groupfinder",
+    "hookform",
     "nextui",
     "planetscale",
+    "valibot",
     "varchar"
   ],
   "css.customData": [".vscode/tailwind.json"],
@@ -13,5 +15,11 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "tailwindCSS.classAttributes": ["class", "className", "classNames", "ngClass"]
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "classNames",
+    "ngClass"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
