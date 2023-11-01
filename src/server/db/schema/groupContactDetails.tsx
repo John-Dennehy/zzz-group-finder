@@ -1,4 +1,4 @@
-import { mysqlTable } from "../../lib/mysqlTable";
+import { mysqlTable } from "@/db/mysqlTable";
 import {
   InferSelectModel,
   InferInsertModel,

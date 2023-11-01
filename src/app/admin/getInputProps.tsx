@@ -1,4 +1,4 @@
-import { GroupInsert } from "@/db/schema/groups";
+import { GroupInsert } from "../../server/db/schema/groups";
 import { InputProps } from "@nextui-org/react";
 
 import { FormState, UseFormRegister } from "react-hook-form";

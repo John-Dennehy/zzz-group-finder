@@ -1,4 +1,4 @@
-import { attendeeTypes } from "@/db/schema";
+import { attendeeTypes } from "../schema";
 import { isNull } from "drizzle-orm";
 import db from "@/db";
 

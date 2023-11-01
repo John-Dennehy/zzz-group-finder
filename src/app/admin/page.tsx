@@ -1,7 +1,6 @@
 import { GroupCard } from "@/components/GroupCard";
-import { NewGroupModal } from "@/components/NewGroupModal";
-import { getAllGroups } from "@/db/queries";
-import selectAllActiveGroups from "@/db/queries/selectAllActiveGroups";
+import NewGroupModal from "@/components/client/NewGroupModal";
+import { getAllGroups, selectAllActiveGroups } from "@/db/queries";
 
 export default async function Home() {
   const data = await getAllGroups;

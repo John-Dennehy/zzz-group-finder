@@ -11,9 +11,9 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
-import { AcmeLogo } from "./svg/AcmeLogo";
 import { useState } from "react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { AcmeLogo } from "@/components/svg/AcmeLogo";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

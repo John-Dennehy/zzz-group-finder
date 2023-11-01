@@ -1,5 +1,5 @@
 import db from "@/db";
-import { groups } from "@/db/schema";
+import { groups } from "../schema";
 import { isNull } from "drizzle-orm";
 
 export default async function selectAllGroups() {

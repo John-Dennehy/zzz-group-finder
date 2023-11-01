@@ -1,4 +1,4 @@
-import { GroupContactDetails } from "@/db/schema";
+import { GroupContactDetails } from "../db/schema";
 import { Link } from "@nextui-org/link";
 import { Button } from "@nextui-org/button";
 import {

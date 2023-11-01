@@ -6,9 +6,9 @@ import {
   groups,
   groupsToAttendeeTypes,
 } from "../schema";
-import { and, eq, isNotNull, isNull } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 
-export default async function selectAllActiveGroups() {
+export async function selectAllActiveGroups() {
   const response = await db
     .select({
       id: groups.id,
@@ -44,6 +44,8 @@ export default async function selectAllActiveGroups() {
     );
   return response;
 }
+
+export default selectAllActiveGroups;
 
 // SELECT manufacturer.name, category_product.id_category
 // FROM manufacturer

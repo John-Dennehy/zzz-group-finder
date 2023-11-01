@@ -12,7 +12,6 @@ import {
 import React from "react";
 import { NewGroupForm } from "./NewGroupForm";
 
-
 export const NewGroupModal = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 

@@ -1,14 +1,19 @@
 import NextImage from "next/image";
+
+// NextUI components
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Location } from "./Location";
-import { TimeRange } from "./TimeRange";
-import formatDate from "@/lib/formatDate";
-import { AttendeeType } from "@/db/schema";
-import { ContactDetails } from "./ContactDetails";
-import { Tooltip } from "@nextui-org/tooltip";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
+import { Tooltip } from "@nextui-org/tooltip";
+
 import { GetAllActiveGroups, getAllActiveGroups } from "@/db/queries";
+import { AttendeeType } from "@/db/schema";
+
+import formatDate from "@/lib/formatDate";
+
+import { Location } from "./Location";
+import { TimeRange } from "./TimeRange";
+import { ContactDetails } from "./ContactDetails";
 
 type ActiveGroup = ArrayElement<GetAllActiveGroups>;
 
@@ -38,7 +43,7 @@ export function GroupCard({
 }: GroupCardProps) {
   return (
     <Card className="border-separate bg-foreground-50 border-secondary-500 drop-shadow-xl h-full">
-      <CardHeader className="flex bg-secondary-600 h-32 md:h-24 gap-2 w-full h-full flex-row justify-between">
+      <CardHeader className="flex bg-secondary-600 md:h-24 gap-2 w-full h-full flex-row justify-between">
         <div className="flex flex-col gap-1 ">
           <h2 className="text-xl font-bold text-foreground-50 text-left">
             <span className="truncate ">{name}</span>
