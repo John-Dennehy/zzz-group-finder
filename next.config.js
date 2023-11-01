@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["images.unsplash.com", "www.netmums.com", "i.pinimg.com"],
+    remotePatterns: [
+      { hostname: "images.unsplash.com" },
+      { hostname: "www.netmums.com" },
+      { hostname: "i.pinimg.com" },
+    ],
   },
 };
 
