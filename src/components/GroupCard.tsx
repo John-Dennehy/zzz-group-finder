@@ -3,13 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Location } from "./Location";
 import { TimeRange } from "./TimeRange";
 import formatDate from "@/lib/formatDate";
-import {
-  AttendeeType,
-  GroupContactDetails,
-  GroupOpenHours,
-  GroupsToAttendeeTypes,
-  Group,
-} from "@/db/schema";
+import { AttendeeType } from "@/db/schema";
 import { ContactDetails } from "./ContactDetails";
 import { Tooltip } from "@nextui-org/tooltip";
 import { Chip } from "@nextui-org/chip";
@@ -57,13 +51,13 @@ export function GroupCard({
                 <li key={attendee.id} className="">
                   {attendee.description && (
                     <Tooltip content={attendee.description}>
-                      <Chip className="bg-primary-600 text-foreground-50">
+                      <Chip className="bg-primary-600 text-foreground-50 capitalize">
                         {attendee.name}
                       </Chip>
                     </Tooltip>
                   )}
                   {!attendee.description && (
-                    <Chip className="bg-primary-600 text-foreground-50">
+                    <Chip className="bg-primary-600 text-foreground-50 capitalize">
                       {attendee.name}
                     </Chip>
                   )}
