@@ -23,9 +23,9 @@ export function SearchGroups({ attendeeTypes }: SearchGroupsProps) {
     <>
       <div className="flex gap-2">
         <h2>Filter:</h2>
-        {attendeeTypes.map((attendeeType, index) => (
+        {attendeeTypes.map((attendeeType) => (
           <Chip
-            key={index}
+            key={attendeeType.id}
             variant="flat"
             color="secondary"
             className="capitalize "
@@ -55,7 +55,7 @@ const AttendeeFilter = ({ attendeeTypes }: AttendeeFilterProps) => {
           variant="flat"
           color="secondary"
           className="capitalize "
-          onClick={() => handleClick(attendeeType.name)}
+          // onClick={() => handleClick(attendeeType.name)}
         >
           {attendeeType.name}
         </Chip>

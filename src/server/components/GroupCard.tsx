@@ -1,33 +1,29 @@
-import NextImage from "next/image";
+import { ContactDetails } from "@/components/ContactDetails"
+import { Location } from "@/components/Location"
+import { TimeRange } from "@/components/TimeRange"
+import { GetAllActiveGroups } from "@/db/queries"
+import { AttendeeType } from "@/db/schema"
+import { formatDate } from "@/lib/formatDate"
+import { Card,CardBody,CardFooter,CardHeader } from "@nextui-org/card"
+import { Chip } from "@nextui-org/chip"
+import { Image } from "@nextui-org/image"
+import { Tooltip } from "@nextui-org/tooltip"
+import NextImage from "next/image"
 
-// NextUI components
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Chip } from "@nextui-org/chip";
-import { Image } from "@nextui-org/image";
-import { Tooltip } from "@nextui-org/tooltip";
-
-import { GetAllActiveGroups, getAllActiveGroups } from "@/db/queries";
-import { AttendeeType } from "@/db/schema";
-
-import formatDate from "@/lib/formatDate";
-
-import { Location } from "./Location";
-import { TimeRange } from "./TimeRange";
-import { ContactDetails } from "./ContactDetails";
-
-type ActiveGroup = ArrayElement<GetAllActiveGroups>;
+type ActiveGroup = ArrayElement<GetAllActiveGroups>
 
 type ArrayElement<ArrayType extends readonly unknown[]> =
-  ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never
 
 export interface AttendeeTypeDetails
   extends Partial<Pick<AttendeeType, "name" | "description" | "active">> {
-  id: string | number | null;
+  id: string | number | null
 }
 
 interface GroupCardProps extends ActiveGroup {
-  attendeeTypeDetails: AttendeeTypeDetails[];
+  attendeeTypeDetails: AttendeeTypeDetails[]
 }
+
 export function GroupCard({
   name,
   logoUrl,
@@ -42,10 +38,10 @@ export function GroupCard({
   attendeeTypeDetails,
 }: GroupCardProps) {
   return (
-    <Card className="border-separate bg-foreground-50 border-secondary-500 drop-shadow-xl h-full">
-      <CardHeader className="flex bg-secondary-600 md:h-24 gap-2 w-full h-full flex-row justify-between">
+    <Card className="h-full border-separate border-secondary-500 bg-foreground-50 drop-shadow-xl">
+      <CardHeader className="flex h-full w-full flex-row justify-between gap-2 bg-secondary-600 md:h-24">
         <div className="flex flex-col gap-1 ">
-          <h2 className="text-xl font-bold text-foreground-50 text-left">
+          <h2 className="text-left text-xl font-bold text-foreground-50">
             <span className="truncate ">{name}</span>
             {!active && " (currently inactive)"}
           </h2>
@@ -56,13 +52,13 @@ export function GroupCard({
                 <li key={attendee.id} className="">
                   {attendee.description && (
                     <Tooltip content={attendee.description}>
-                      <Chip className="bg-primary-600 text-foreground-50 capitalize">
+                      <Chip className="bg-primary-600 capitalize text-foreground-50">
                         {attendee.name}
                       </Chip>
                     </Tooltip>
                   )}
                   {!attendee.description && (
-                    <Chip className="bg-primary-600 text-foreground-50 capitalize">
+                    <Chip className="bg-primary-600 capitalize text-foreground-50">
                       {attendee.name}
                     </Chip>
                   )}
@@ -85,7 +81,7 @@ export function GroupCard({
       <CardBody className="flex flex-col justify-between gap-4  p-3">
         <Location address={address} postCode={postCode} />
 
-        <div className="flex flex-col gap-1 h-full">
+        <div className="flex h-full flex-col gap-1">
           {groupOpenHours.map((openHour) => (
             <TimeRange
               key={openHour.weekday}
@@ -104,12 +100,12 @@ export function GroupCard({
           <ContactDetails groupContactDetails={groupContactDetails} />
         </div>
       </CardBody>
-      <CardFooter className="flex flex-col gap-1 items-end">
-        <p className="text-foreground-500 text-xs ">
+      <CardFooter className="flex flex-col items-end gap-1">
+        <p className="text-xs text-foreground-500 ">
           {!verifiedAt && updatedAt && `Last Updated: ${formatDate(updatedAt)}`}
           {verifiedAt && `Verified: ${formatDate(verifiedAt)}`}
         </p>
       </CardFooter>
     </Card>
-  );
+  )
 }

@@ -1,20 +1,20 @@
 import { mysqlTable } from "@/db/mysqlTable";
 import {
-  InferSelectModel,
-  InferInsertModel,
   relations,
   sql,
-} from "drizzle-orm";
+  type InferInsertModel,
+  type InferSelectModel,
+} from "drizzle-orm"
 import {
   boolean,
   serial,
   text,
   timestamp,
   varchar,
-} from "drizzle-orm/mysql-core";
-import groupOpenHours from "./groupOpenHours";
-import groupsToAttendeeTypes from "./groupsToAttendeeTypes";
-import groupContactDetails from "./groupContactDetails";
+} from "drizzle-orm/mysql-core"
+import groupContactDetails from "./groupContactDetails"
+import groupOpenHours from "./groupOpenHours"
+import groupsToAttendeeTypes from "./groupsToAttendeeTypes"
 
 export const groups = mysqlTable("groups", {
   id: serial("id").primaryKey(),
@@ -35,16 +35,17 @@ export const groups = mysqlTable("groups", {
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
   deletedAt: timestamp("deleted_at"),
-});
+})
 
 export const groupRelations = relations(groups, ({ many }) => ({
   groupOpenHours: many(groupOpenHours),
   groupsToAttendeeTypes: many(groupsToAttendeeTypes),
   groupContactDetails: many(groupContactDetails),
-}));
+}))
 
-export type Group = InferSelectModel<typeof groups>;
-export type GroupInsert = InferInsertModel<typeof groups>;
-export type GroupUpdate = Partial<GroupInsert>;
+export type Group = InferSelectModel<typeof groups>
+export type GroupInsert = InferInsertModel<typeof groups>
+export type GroupId = Pick<Group, "id">
+export type GroupUpdate = Partial<GroupInsert>
 
 export default groups;

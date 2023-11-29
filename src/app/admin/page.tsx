@@ -1,26 +1,32 @@
-import { GroupCard } from "@/components/GroupCard";
-import NewGroupModal from "@/components/client/NewGroupModal";
-import { getAllGroups, selectAllActiveGroups } from "@/db/queries";
+import db from "@/server/db"
+import { sql } from "drizzle-orm"
 
 export default async function Home() {
-  const data = await getAllGroups;
-  const selectData = await selectAllActiveGroups();
-  console.log(selectData);
+  // const data = await getAllGroups
+  // const selectData = await selectAllActiveGroups()
+  // console.log(selectData)
 
+  const statement = sql`select * from groupfinder_groups`
+  const res = await db.execute(statement)
+  const data = res.rows
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-lg text-primary">Admin Page</h2>
-      <NewGroupModal />
+      <h1 className="text-lg text-primary">Root Admin Page</h1>
+      {/* <NewGroupModal /> */}
+      <pre>{JSON.stringify(res, null, 2)}</pre>
+      <pre>{JSON.stringify(res.rows, null, 2)}</pre>
 
-      <pre>{JSON.stringify(selectData, null, 2)}</pre>
-
-      {/* <ul className="flex mx-auto gap-2 flex-wrap">
-        {data.map((group) => (
-          <li key={group.id}>
-            <GroupCard group={group} />
+      <ul className="mx-auto flex flex-wrap gap-2">
+        {data.map((group, index) => (
+          <li key={index}>
+            Group Details
+            <pre>
+              {JSON.stringify(group, null, 2)}
+              {/* {JSON.stringify(group, null, 2)} */}
+            </pre>
           </li>
         ))}
-      </ul> */}
+      </ul>
     </div>
-  );
+  )
 }

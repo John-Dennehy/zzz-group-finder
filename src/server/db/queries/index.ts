@@ -4,4 +4,6 @@ export * from "./selectAllActiveGroups";
 export * from "./selectAllGroups";
 
 export * from "./selectAllAttendeeTypes";
-export * from "./selectAllActiveAttendeeTypes";
+
+export * as attendeeTypes from "./attendeeTypes";
+export * as groups from "./groups";
