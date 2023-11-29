@@ -1,9 +1,9 @@
-import Navbar from "@/components/client/Navbar"
+import { Providers } from "@/components/ClientProviders"
+import Navbar from "@/components/Navbar"
+import "@/styles/globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
-import { Providers } from "../client/providers"
-import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 

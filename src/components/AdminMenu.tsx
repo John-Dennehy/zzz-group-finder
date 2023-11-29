@@ -1,7 +1,7 @@
 "use client"
 
+import { NavButton } from "@/components/NavButton"
 import { usePathname } from "next/navigation"
-import { NavButton } from "./NavButton"
 
 const menuItems = [
   { href: "/admin", text: "Admin Home" },

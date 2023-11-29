@@ -1,23 +1,23 @@
-"use client";
+"use client"
 
-import { selectAllAttendeeTypes } from "../../server/db/queries";
-import { Chip } from "@nextui-org/chip";
-import { Divider } from "@nextui-org/divider";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { Chip } from "@nextui-org/chip"
+import { Divider } from "@nextui-org/divider"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { selectAllAttendeeTypes } from "../db/queries"
 
 type SearchGroupsProps = {
-  attendeeTypes: typeof selectAllAttendeeTypes;
-};
+  attendeeTypes: typeof selectAllAttendeeTypes
+}
 
 export function SearchGroups({ attendeeTypes }: SearchGroupsProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
 
   const handleClick = (attendeeTypeName: string) => {
     // const currentRoute =
-    router.push(`?attendeeType=${attendeeTypeName}`, {});
-  };
+    router.push(`?attendeeType=${attendeeTypeName}`, {})
+  }
 
   return (
     <>
@@ -39,12 +39,12 @@ export function SearchGroups({ attendeeTypes }: SearchGroupsProps) {
       <Divider />
       <br />
     </>
-  );
+  )
 }
 
 type AttendeeFilterProps = {
-  attendeeTypes: typeof selectAllAttendeeTypes;
-};
+  attendeeTypes: typeof selectAllAttendeeTypes
+}
 
 const AttendeeFilter = ({ attendeeTypes }: AttendeeFilterProps) => {
   return (
@@ -61,6 +61,6 @@ const AttendeeFilter = ({ attendeeTypes }: AttendeeFilterProps) => {
         </Chip>
       ))}
     </>
-  );
-};
-export default SearchGroups;
+  )
+}
+export default SearchGroups

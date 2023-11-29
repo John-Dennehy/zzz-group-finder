@@ -1,4 +1,4 @@
-import { nextuiPlugin } from "./src/lib/nextui";
+import { nextuiPlugin } from "./src/styles/nextui"
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -8,6 +8,6 @@ const config = {
   ],
   darkMode: "class",
   plugins: [nextuiPlugin],
-};
+}
 
-export default config;
+export default config

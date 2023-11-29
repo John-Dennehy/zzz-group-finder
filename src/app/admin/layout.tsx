@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { AdminMenu } from "./AdminMenu"
+import { AdminMenu } from "@/components/AdminMenu"
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (

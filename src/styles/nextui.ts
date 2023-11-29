@@ -1,5 +1,4 @@
-import { nextui, NextUIPluginConfig, ColorScale } from "@nextui-org/react";
-import { variants } from "@catppuccin/palette";
+import { ColorScale, NextUIPluginConfig, nextui } from "@nextui-org/react"
 
 const colors: ColorScale = {
   "50": "hsl(138, 76%, 97%)",
@@ -12,7 +11,7 @@ const colors: ColorScale = {
   "700": "hsl(142, 72%, 29%)",
   "800": "hsl(143, 64%, 24%)",
   "900": "hsl(144, 61%, 20%)",
-};
+}
 
 // $rosewater: #f4dbd6;
 // $flamingo: #f0c6c6;
@@ -39,7 +38,7 @@ const colors: ColorScale = {
 // $surface0: #363a4f;
 // $base: #24273a;
 // $mantle: #1e2030;
-// $crust: #181926; 
+// $crust: #181926;
 
 const nextUiConfig: NextUIPluginConfig = {
   prefix: "nextui",
@@ -69,7 +68,7 @@ const nextUiConfig: NextUIPluginConfig = {
       },
     },
   },
-};
+}
 
-export const nextuiPlugin = nextui(nextUiConfig);
-export default nextuiPlugin;
+export const nextuiPlugin = nextui(nextUiConfig)
+export default nextuiPlugin
