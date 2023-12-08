@@ -1,4 +1,4 @@
-import { mysqlTable } from "@/db/mysqlTable";
+import { contactDetails, groupAttendeeTypes, openHours } from "@/db/schema"
 import {
   relations,
   sql,
@@ -12,18 +12,17 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core"
-import groupContactDetails from "./groupContactDetails"
-import groupOpenHours from "./groupOpenHours"
-import groupsToAttendeeTypes from "./groupsToAttendeeTypes"
+import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 
-export const groups = mysqlTable("groups", {
+// Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
+import { groupfinderTable as mysqlTableCreator } from "@/db/groupfinderTable"
+
+// drizzle schema for groups table
+export const groups = mysqlTableCreator("groups", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
   description: text("description"),
   logoUrl: varchar("logo_url", { length: 256 }),
-
-  address: varchar("address", { length: 256 }).notNull(),
-  postCode: varchar("post_code", { length: 256 }).notNull(),
 
   verifiedAt: timestamp("verified_at"),
   active: boolean("active").default(true).notNull(),
@@ -37,15 +36,21 @@ export const groups = mysqlTable("groups", {
   deletedAt: timestamp("deleted_at"),
 })
 
+// relations (one to many)
 export const groupRelations = relations(groups, ({ many }) => ({
-  groupOpenHours: many(groupOpenHours),
-  groupsToAttendeeTypes: many(groupsToAttendeeTypes),
-  groupContactDetails: many(groupContactDetails),
+  groupOpenHours: many(openHours),
+  groupsToAttendeeTypes: many(groupAttendeeTypes),
+  groupContactDetails: many(contactDetails),
 }))
 
+// zod schemas for validation
+export const selectGroupsSchema = createSelectSchema(groups)
+export const insertGroupsSchema = createInsertSchema(groups)
+
+// types
 export type Group = InferSelectModel<typeof groups>
 export type GroupInsert = InferInsertModel<typeof groups>
 export type GroupId = Pick<Group, "id">
 export type GroupUpdate = Partial<GroupInsert>
 
-export default groups;
+export default groups
