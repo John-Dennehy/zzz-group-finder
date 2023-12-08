@@ -1,5 +1,6 @@
-export * from "./attendeeTypes"
-export * from "./groupContactDetails"
-export * from "./groupOpenHours"
+export * from "./old/attendeeTypes"
+export * from "./old/groupsToAttendeeTypes"
+
+export * from "./contact-details"
 export * from "./groups"
-export * from "./groupsToAttendeeTypes"
+export * from "./open-hours"
