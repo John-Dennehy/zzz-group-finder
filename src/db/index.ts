@@ -1,12 +1,7 @@
-import { drizzle } from "drizzle-orm/planetscale-serverless";
-import { connect } from "@planetscale/database";
-import * as schema from "./schema";
-import { config } from "./config";
+import { config } from "./config"
+import * as db from "./connection"
+import * as schema from "./schema"
 
-// create the connection
-const connection = connect(config);
-export const db = drizzle(connection, { schema });
+export { config, db, schema }
 
-export default db;
-
-
+export default db
