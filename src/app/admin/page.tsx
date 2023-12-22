@@ -1,32 +1,28 @@
-import db from "@/db"
-import { sql } from "drizzle-orm"
+import { db } from "@/db"
+import { groups, selectGroupSchema } from "@/db/schema"
 
-export default async function Home() {
-  // const data = await getAllGroups
-  // const selectData = await selectAllActiveGroups()
-  // console.log(selectData)
+export default async function AdminPage() {
+  const result = await db.select().from(groups)
 
-  const statement = sql`select * from groupfinder_groups`
-  const res = await db.execute(statement)
-  const data = res.rows
+  //  validate response with zod
+  const data = selectGroupSchema.safeParse(result)
+  console.log(data)
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-lg text-primary">Root Admin Page</h1>
       {/* <NewGroupModal /> */}
-      <pre>{JSON.stringify(res, null, 2)}</pre>
-      <pre>{JSON.stringify(res.rows, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(res, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
 
-      <ul className="mx-auto flex flex-wrap gap-2">
+      {/* <ul className="mx-auto flex flex-wrap gap-2">
         {data.map((group, index) => (
           <li key={index}>
             Group Details
-            <pre>
-              {JSON.stringify(group, null, 2)}
-              {/* {JSON.stringify(group, null, 2)} */}
-            </pre>
+            <pre>{JSON.stringify(group, null, 2)}</pre>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   )
 }

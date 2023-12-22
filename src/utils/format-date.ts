@@ -1,6 +1,10 @@
-type UtcDate = string | Date;
+type UtcDate = string | Date
 
-export function formatDate(utcDate: UtcDate) {
+export function formatDate(utcDate: UtcDate | null) {
+  if (!utcDate) {
+    return ""
+  }
+
   const date = new Date(utcDate)
   return date.toLocaleString("en-GB", {
     weekday: "short",

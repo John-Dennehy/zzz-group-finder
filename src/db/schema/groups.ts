@@ -1,25 +1,17 @@
-import { contactDetails, groupAttendeeTypes, openHours } from "@/db/schema"
-import {
-  relations,
-  sql,
-  type InferInsertModel,
-  type InferSelectModel,
-} from "drizzle-orm"
-import {
-  boolean,
-  serial,
-  text,
-  timestamp,
-  varchar,
-} from "drizzle-orm/mysql-core"
+import { relations, sql } from "drizzle-orm"
+import { boolean, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
+import { createPublicId } from "../../utils/create-public-id"
+import { contactDetails, openHours } from "../schema"
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
-import { groupfinderTable as mysqlTableCreator } from "@/db/groupfinderTable"
+import { groupfinderTable as mysqlTable } from "../utils"
 
 // drizzle schema for groups table
-export const groups = mysqlTableCreator("groups", {
-  id: serial("id").primaryKey(),
+export const groups = mysqlTable("groups", {
+  id: varchar("id", { length: 6 })
+    .primaryKey()
+    .$defaultFn(() => createPublicId()),
   name: varchar("name", { length: 256 }).notNull(),
   description: text("description"),
   logoUrl: varchar("logo_url", { length: 256 }),
@@ -39,18 +31,15 @@ export const groups = mysqlTableCreator("groups", {
 // relations (one to many)
 export const groupRelations = relations(groups, ({ many }) => ({
   groupOpenHours: many(openHours),
-  groupsToAttendeeTypes: many(groupAttendeeTypes),
   groupContactDetails: many(contactDetails),
 }))
 
 // zod schemas for validation
-export const selectGroupsSchema = createSelectSchema(groups)
-export const insertGroupsSchema = createInsertSchema(groups)
+export const selectGroupSchema = createSelectSchema(groups)
+export const insertGroupSchema = createInsertSchema(groups)
 
-// types
-export type Group = InferSelectModel<typeof groups>
-export type GroupInsert = InferInsertModel<typeof groups>
-export type GroupId = Pick<Group, "id">
-export type GroupUpdate = Partial<GroupInsert>
+// Type definitions
+export type SelectGroup = typeof groups.$inferSelect
+export type InsertGroup = typeof groups.$inferInsert
 
 export default groups

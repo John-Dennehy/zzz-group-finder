@@ -3,8 +3,8 @@ import { Location } from "@/components/Location"
 import { TimeRange } from "@/components/TimeRange"
 import { GetAllActiveGroups } from "@/db/queries"
 import { AttendeeType } from "@/db/schema"
-import { formatDate } from "@/lib/formatDate"
-import { Card,CardBody,CardFooter,CardHeader } from "@nextui-org/card"
+import { formatDate } from "@/utils/format-date"
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
 import { Chip } from "@nextui-org/chip"
 import { Image } from "@nextui-org/image"
 import { Tooltip } from "@nextui-org/tooltip"
@@ -28,8 +28,6 @@ export function GroupCard({
   name,
   logoUrl,
   description,
-  address,
-  postCode,
   groupContactDetails,
   groupOpenHours,
   active,
@@ -79,7 +77,7 @@ export function GroupCard({
         )}
       </CardHeader>
       <CardBody className="flex flex-col justify-between gap-4  p-3">
-        <Location address={address} postCode={postCode} />
+        {/* <Location address={address} postCode={postCode} /> */}
 
         <div className="flex h-full flex-col gap-1">
           {groupOpenHours.map((openHour) => (

@@ -4,11 +4,11 @@ import { sql } from "drizzle-orm"
 
 export const groupfinderAttendeeTypes = mysqlTable("groupfinder_attendee_types", {
 	id: serial("id").notNull(),
-	name: varchar("name", { length: 256 }),
+	name: varchar("name", { length: 256 }).notNull(),
 	description: text("description"),
-	active: tinyint("active"),
-	createdAt: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
-	updatedAt: timestamp("updated_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
+	active: tinyint("active").notNull(),
+	createdAt: timestamp("created_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updated_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	deletedAt: timestamp("deleted_at", { mode: 'string' }),
 },
 (table) => {
@@ -45,6 +45,7 @@ export const groupfinderGroupOpenHours = mysqlTable("groupfinder_group_open_hour
 	updatedAt: timestamp("updated_at", { mode: 'string' }).default(sql`CURRENT_TIMESTAMP`),
 	deletedAt: timestamp("deleted_at", { mode: 'string' }),
 	active: tinyint("active").default(1).notNull(),
+	description: varchar("description", { length: 255 }),
 },
 (table) => {
 	return {

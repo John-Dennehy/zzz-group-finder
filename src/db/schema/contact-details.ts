@@ -1,17 +1,15 @@
-import { groupfinderTable } from "@/db/groupfinderTable"
-import { groups } from "@/db/schema"
 import { relations, sql } from "drizzle-orm"
-import {
-  boolean,
-  int,
-  mysqlEnum,
-  serial,
-  timestamp,
-  varchar,
-} from "drizzle-orm/mysql-core"
-import { contactTypes } from "./contact-types"
+import { boolean, int, mysqlEnum, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
+import { createInsertSchema, createSelectSchema } from "drizzle-zod"
+import { groups } from "../schema"
 
-export const contactDetails = groupfinderTable("group_contact_details", {
+// Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
+import { groupfinderTable as mysqlTable } from "../utils"
+
+const contactTypes = ["email", "phone", "text", "facebook", "website", "whatsapp"] as const
+
+// drizzle schema for contact_details table
+export const contactDetails = mysqlTable("contact_details", {
   id: serial("id").primaryKey(),
   groupId: int("group_id"),
   contactType: mysqlEnum("contact_type", contactTypes).notNull(),
@@ -26,14 +24,16 @@ export const contactDetails = groupfinderTable("group_contact_details", {
   deletedAt: timestamp("deleted_at"),
 })
 
-export const groupContactDetailsRelations = relations(
-  contactDetails,
-  ({ one }) => ({
-    group: one(groups, {
-      fields: [contactDetails.groupId],
-      references: [groups.id],
-    }),
+// relations (many to one)
+export const groupContactDetailsRelations = relations(contactDetails, ({ one }) => ({
+  group: one(groups, {
+    fields: [contactDetails.groupId],
+    references: [groups.id],
   }),
-)
+}))
+
+// zod schemas for validation
+export const selectContactDetailsSchema = createSelectSchema(contactDetails)
+export const insertContactDetailsSchema = createInsertSchema(contactDetails)
 
 export default contactDetails

@@ -1,12 +1,13 @@
-import formatTime from "@/lib/formatTime";
-import { Chip } from "@nextui-org/chip";
+import formatTime from "@/utils/format-time"
+import { Weekday } from "@/utils/week-days"
+import { Chip } from "@nextui-org/chip"
 
 export type TimeRangeProps = {
-  start: string;
-  end: string;
-  weekday: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
-  description: string | null;
-};
+  start: string
+  end: string
+  weekday: Weekday
+  description: string | null
+}
 
 export function TimeRange({
   start,
@@ -15,11 +16,11 @@ export function TimeRange({
   description,
 }: TimeRangeProps) {
   if (!start || !end) {
-    return null;
+    return null
   }
 
-  const additionalInfo = description ? `  ${description}` : "";
-  const formattedTime = `${formatTime(start)} - ${formatTime(end)}`;
+  const additionalInfo = description ? `  ${description}` : ""
+  const formattedTime = `${formatTime(start)} - ${formatTime(end)}`
 
   return (
     <div className="flex gap-2">
@@ -33,5 +34,5 @@ export function TimeRange({
         )}
       </div>
     </div>
-  );
+  )
 }

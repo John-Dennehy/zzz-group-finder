@@ -1,27 +1,16 @@
-import { groups } from "@/db/schema"
 import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
-import {
-  boolean,
-  int,
-  mysqlEnum,
-  serial,
-  time,
-  timestamp,
-  varchar,
-} from "drizzle-orm/mysql-core"
+import { boolean, int, mysqlEnum, serial, time, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
+import { weekdays } from "../../utils/week-days"
+import { groups } from "../schema"
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
-import { groupfinderTable } from "@/db/groupfinderTable"
-
-// as const is needed to make sure the array is not widened to string[]
-const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const
-
+import { groupfinderTable as mysqlTable } from "../utils"
 // drizzle schema for open_hours table
-export const openHours = groupfinderTable("group_open_hours", {
+export const openHours = mysqlTable("group_open_hours", {
   id: serial("id").primaryKey(),
   groupId: int("group_id"),
-  weekday: mysqlEnum("weekday", weekDays).notNull(),
+  weekday: mysqlEnum("weekday", weekdays).notNull(),
   start: time("start").notNull(),
   end: time("end").notNull(),
   description: varchar("description", { length: 255 }),

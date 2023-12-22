@@ -9,16 +9,17 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
-import { useState } from "react";
-import { ThemeSwitcher } from "./ThemeSwitcher";
-import { AcmeLogo } from "@/components/svg/AcmeLogo";
+import { Button } from "@nextui-org/react"
+import { Link } from "@nextui-org/link"
+import NextLink from "next/link"
+import { useState } from "react"
+import { ThemeSwitcher } from "./ThemeSwitcher"
+import { AcmeLogo } from "@/components/svg/AcmeLogo"
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const menuItems: string[] = [];
+  const menuItems: string[] = []
 
   return (
     <NextuiNavbar
@@ -29,25 +30,19 @@ export default function Navbar() {
         wrapper: "container mx-auto max-w-screen-2xl",
       }}
     >
-      <NavbarContent className="sm:hidden " justify="start">
+      <NavbarContent className="sm:hidden md:flex" justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
-
-      <NavbarContent className="sm:hidden pr-3" justify="center">
-        <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">ACME</p>
-        </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">Group Finder</p>
-        </NavbarBrand>
-      </NavbarContent>
+      <Link as={NextLink} href="/">
+        <NavbarContent className="pr-3 " justify="center">
+          <NavbarBrand>
+            <AcmeLogo />
+            <p className="font-bold text-inherit">Group Finder</p>
+          </NavbarBrand>
+        </NavbarContent>
+      </Link>
 
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
@@ -67,8 +62,8 @@ export default function Navbar() {
                 index === 2
                   ? "warning"
                   : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
+                    ? "danger"
+                    : "foreground"
               }
               href="#"
               size="lg"
@@ -79,5 +74,5 @@ export default function Navbar() {
         ))}
       </NavbarMenu>
     </NextuiNavbar>
-  );
+  )
 }

@@ -7,8 +7,8 @@ type PageProps = {
 export default async function Home({ searchParams }: PageProps) {
   // const activeGroups = selectAllActiveGroups;
 
-  const allGroups = selectAllGroups
-  console.log(allGroups)
+  // const allGroups = selectAllGroups
+  // console.log(allGroups)
   // console.log(searchParams);
   // const attendeeTypes = selectAllActiveAttendeeTypes;
 
@@ -58,9 +58,10 @@ export default async function Home({ searchParams }: PageProps) {
           </li>
         ))}
       </ul> */}
-      <pre>
+      Hello World
+      {/* <pre>
         <code>{JSON.stringify(allGroups, null, 2)}</code>
-      </pre>
+      </pre> */}
     </>
   )
 }
