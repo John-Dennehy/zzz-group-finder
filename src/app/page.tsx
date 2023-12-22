@@ -1,5 +1,3 @@
-import { selectAllGroups } from "@/db/queries/groups"
-
 type PageProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
