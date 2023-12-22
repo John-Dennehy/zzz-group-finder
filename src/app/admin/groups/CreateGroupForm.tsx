@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react"
 import { useFormState } from "react-dom"
-import { createGroupAction } from "./create-group-action"
+import { createGroupAction } from "./actions/create-group-action"
 
 export type FormState = InsertGroup
 export const initialState: FormState = {
