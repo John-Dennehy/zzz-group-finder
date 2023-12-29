@@ -1,7 +1,7 @@
 import db from "@/db/connection"
 import { selectGroupSchema } from "@/db/schema"
-import CreateGroupForm from "./CreateGroupForm"
-import { GroupTable } from "./GroupTable"
+import CreateGroupForm from "@/components/CreateGroupForm"
+import { GroupTable } from "@/components/GroupTable"
 
 export default async function GroupsPage() {
   const response = await db.query.groups.findMany()

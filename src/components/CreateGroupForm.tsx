@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react"
 import { useFormState } from "react-dom"
-import { createGroupAction } from "./actions/create-group-action"
+import { createGroupAction } from "@/app/(root)/admin/groups/actions/create-group-action"
 
 export type FormState = InsertGroup
 export const initialState: FormState = {
@@ -24,7 +24,7 @@ export const initialState: FormState = {
 
 export default function CreateGroupForm() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const [state, formAction] = useFormState(createGroupAction, initialState)
+  const [ state, formAction ] = useFormState(createGroupAction, initialState)
 
   return (
     <>
