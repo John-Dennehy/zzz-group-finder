@@ -51,8 +51,6 @@ export function GroupTable({ items, columns }: GroupTableProps) {
     alert("set status")
   }
 
-  // @ts-ignore
-
   const getWidth = (column: Column) => {
     if (column.width) return column.width
     return "auto"
