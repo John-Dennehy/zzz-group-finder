@@ -1,6 +1,6 @@
 "use client"
 
-import { deleteGroupAction } from "@/app/(auth)/admin/groups/actions/deleteGroupAction"
+import { deleteGroupAction } from "@/app/admin/groups/actions/deleteGroupAction"
 import { Group } from "@/services/groups"
 import { FormActionState } from "@/utils/utility-types"
 import { Button, Tooltip } from "@nextui-org/react"

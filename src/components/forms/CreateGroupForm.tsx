@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import { Input, Checkbox } from "@nextui-org/react";
-import FormModal from "./FormModal";
-import { useFormState } from "react-dom";
-import { createGroupAction } from "@/app/(auth)/admin/groups/actions/createGroupAction";
-import { FormActionState } from "@/utils/utility-types";
-import { useState } from "react";
+import { createGroupAction } from "@/app/admin/groups/actions/createGroupAction"
+import { FormActionState } from "@/utils/utility-types"
+import { Checkbox, Input } from "@nextui-org/react"
+import { useState } from "react"
+import { useFormState } from "react-dom"
+import FormModal from "./FormModal"
+import { useForm } from "react-hook-form"
 
-
-// used to indicate the status of the form submission. To be updated by the formAction 
+// used to indicate the status of the form submission. To be updated by the formAction
 export const initialState: FormActionState = {
 	isSuccess: null,
-	message: ""
+	message: "",
 }
 
 const formSteps = [
@@ -33,7 +33,7 @@ const formSteps = [
 	{
 		order: 99,
 		name: "Complete",
-	}
+	},
 ]
 
 export function CreateGroupForm() {
@@ -41,21 +41,36 @@ export function CreateGroupForm() {
 	const [ isActive, setIsActive ] = useState<"true" | undefined>()
 	const [ state, formAction ] = useFormState(createGroupAction, initialState)
 
-
-
 	return (
 		<FormModal formId={formId} buttonLabel="Create New Group" modalTitle="New Group">
-			<form action={formAction} id={formId} className="flex w-full flex-col gap-4">
-				<Input label="Name" name="name" />
-				<Input label="Description" name="description" />
-				<Input label="Logo URL" name="logoUrl" />
+			<ReactHookForm />
+			<HTMLForm formId={formId} isActive={isActive} setIsActive={setIsActive} formAction={formAction} />
+		</FormModal>
+	)
+}
 
-				<Checkbox form={formId} name="active" value={isActive} onChange={
-					() => setIsActive("true")
-				}>Active</Checkbox>
-			</form>
-			{state.isSuccess && <div>success</div>}
-			{state.message && <div>{state.message}</div>}
 
-		</FormModal>);
+type Form1Props = {
+	formAction: any
+	formId: string
+	isActive: "true" | undefined
+	setIsActive: any
+}
+function HTMLForm({ formAction, formId, isActive, setIsActive }: Form1Props) {
+	return (
+		<form action={formAction} id={formId} className="flex w-full flex-col gap-4">
+			<Input label="Name" name="name" />
+			<Input label="Description" name="description" />
+			<Input label="Logo URL" name="logoUrl" />
+
+			<Checkbox form={formId} name="active" value={isActive} onChange={() => setIsActive("true")}>
+				Active
+			</Checkbox>
+		</form>);
+}
+
+function ReactHookForm() {
+	return (
+		<div>Form 2!</div>
+	);
 }
