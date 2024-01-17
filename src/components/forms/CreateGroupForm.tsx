@@ -3,7 +3,7 @@
 import { Input, Checkbox } from "@nextui-org/react";
 import FormModal from "./FormModal";
 import { useFormState } from "react-dom";
-import { createGroupAction } from "@/app/(auth)/admin/groups/actions/group-actions";
+import { createGroupAction } from "@/app/(auth)/admin/groups/actions/createGroupAction";
 import { FormActionState } from "@/utils/utility-types";
 import { useState } from "react";
 

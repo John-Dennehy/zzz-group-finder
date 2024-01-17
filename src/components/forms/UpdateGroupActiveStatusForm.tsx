@@ -3,7 +3,7 @@ import { Checkbox } from "@nextui-org/react";
 import { ChangeEvent, useOptimistic } from "react";
 import { Group } from "@/services/groups";
 import { FormActionState } from "@/utils/utility-types";
-import { updateGroupAction } from "@/app/(auth)/admin/groups/actions/group-actions";
+import { updateGroupAction } from "@/app/(auth)/admin/groups/actions/updateGroupAction";
 import { useFormState, useFormStatus } from "react-dom";
 
 
