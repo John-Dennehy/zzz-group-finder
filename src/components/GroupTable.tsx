@@ -2,17 +2,19 @@
 
 import { SelectGroup } from "@/db/schema"
 import formatDate from "@/utils/format-date"
-import { Button, Checkbox, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@nextui-org/react"
+import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@nextui-org/react"
 import type { ColumnSize } from "@/utils/utility-types"
 import React from "react"
 import Link from "next/link"
 import { EyeIcon } from "./svg/EyeIcon"
 import { EditIcon } from "./svg/EditIcon"
-import { DeleteIcon } from "./svg/DeleteIcon"
+import { Group } from "@/services/groups"
+import { DeleteGroupForm } from "./forms/DeleteGroupForm"
+import { UpdateGroupActiveStatusForm } from "./forms/UpdateGroupActiveStatusForm"
 
 export type GroupRowFields = Pick<SelectGroup, "name" | "active" | "id" | "description" | "createdAt" | "updatedAt">
-type GroupColumns = Omit<GroupRowFields, "id">
-
+// type GroupColumns = Omit<GroupRowFields, "id">
+type GroupColumns = GroupRowFields
 
 type Column = {
   key: keyof GroupColumns | "actions"
@@ -22,6 +24,7 @@ type Column = {
 
 const defaultColumns: Column[] = [
   { key: "name", label: "Name" },
+  { key: "id", label: "ID" },
   { key: "active", label: "Active" },
   { key: "createdAt", label: "Created At" },
   { key: "updatedAt", label: "Updated At" },
@@ -29,32 +32,44 @@ const defaultColumns: Column[] = [
 ]
 
 type GroupTableProps = {
-  items: Partial<GroupRowFields>[]
+  groups: Group[]
   columns?: Column[]
+  onEdit?: (item: Group) => void
+  onDelete?: (item: Group) => void
+  onSetStatus?: (item: Group) => void
 }
 
-export function GroupTable({ items, columns }: GroupTableProps) {
+
+
+export function GroupTable({ groups: items, columns, onEdit, onDelete, onSetStatus }: GroupTableProps) {
   if (!columns) columns = defaultColumns
 
   if (!items) return <div>loading...</div>
   if (items.length === 0) return <div>No groups found.</div>
 
-  const handleEdit = () => {
+  const handleEdit = (item: Group) => {
+    // implement edit if callback is provided
+    if (onEdit) return onEdit(item)
+
     alert("edit")
   }
 
-  const handleDelete = () => {
-    alert("delete")
-  }
 
-  const handleSetStatus = () => {
-    alert("set status")
-  }
 
   const getWidth = (column: Column) => {
     if (column.width) return column.width
     return "auto"
   }
+
+  // sort items by updatedAt in ascending order, with undefined values first
+  items.sort((a, b) => {
+    if (a.updatedAt === undefined) return 0
+    if (b.updatedAt === undefined) return 0
+    if (a.updatedAt < b.updatedAt) return 1
+    if (a.updatedAt > b.updatedAt) return -1
+    return 0
+  })
+
 
   return (
     <Table className="p-2">
@@ -72,10 +87,10 @@ export function GroupTable({ items, columns }: GroupTableProps) {
         {(item) => (
           <TableRow key={item.id}>
             <TableCell>{item.name ?? ""}</TableCell>
+            <TableCell>{item.id ?? ""}</TableCell>
             <TableCell>
-              {/* <Tooltip color="primary" content="Toggle Active Status"> */}
-              <Checkbox isSelected={item.active} onClick={handleSetStatus} />
-              {/* </Tooltip> */}
+              <UpdateGroupActiveStatusForm group={item} />
+
             </TableCell>
             <TableCell>{item.createdAt ? formatDate(item.createdAt) : ""}</TableCell>
             <TableCell>{item.updatedAt ? formatDate(item.updatedAt) : ""}</TableCell>
@@ -88,16 +103,14 @@ export function GroupTable({ items, columns }: GroupTableProps) {
               </Tooltip>
 
               <Tooltip color="primary" content="Edit Group" closeDelay={0}>
-                <Button isIconOnly size="md" onClick={handleEdit}>
+                <Button isIconOnly size="md" onClick={
+                  () => handleEdit(item)
+                }>
                   <EditIcon />
                 </Button>
               </Tooltip>
 
-              <Tooltip color="danger" content="Delete Group" closeDelay={0}>
-                <Button isIconOnly size="md" color="danger" onClick={handleDelete}>
-                  <DeleteIcon />
-                </Button>
-              </Tooltip>
+              <DeleteGroupForm group={item} />
 
             </TableCell>
           </TableRow>
@@ -106,3 +119,5 @@ export function GroupTable({ items, columns }: GroupTableProps) {
     </Table>
   )
 }
+
+

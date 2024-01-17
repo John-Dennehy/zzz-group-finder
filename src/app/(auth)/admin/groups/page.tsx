@@ -1,7 +1,9 @@
 import db from "@/db/connection"
 import { selectGroupSchema } from "@/db/schema"
-import CreateGroupForm from "@/components/CreateGroupForm"
+
 import { GroupTable } from "@/components/GroupTable"
+import { CreateGroupForm } from "@/components/forms/CreateGroupForm"
+
 
 export default async function GroupsPage() {
   const response = await db.query.groups.findMany()
@@ -25,15 +27,7 @@ export default async function GroupsPage() {
         return null
       }
 
-      const { id, name, createdAt, updatedAt, active } = validatedGroup.data
-
-      return {
-        id,
-        name,
-        createdAt,
-        updatedAt,
-        active,
-      }
+      return validatedGroup.data
     })
     .filter(Boolean) // remove null items
 
@@ -43,7 +37,9 @@ export default async function GroupsPage() {
       <CreateGroupForm />
       <h1>Groups Page</h1>
       <h1>Create Group Form</h1>
-      <GroupTable items={items} />
+      <GroupTable groups={items}
+
+      />
     </>
   )
 }

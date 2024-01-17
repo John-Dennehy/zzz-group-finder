@@ -6,19 +6,19 @@ import { isValid as isValidPostcode, toNormalised } from "postcode"
 import z from "zod"
 
 // Import related table schemas
-import { groups } from "../schema"
+import { groups } from "."
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
 import { groupfinderTable as mysqlTable } from "../utils"
 
 // drizzle schema for address table
-export const address = mysqlTable("address", {
+export const addresses = mysqlTable("addresses", {
   id: serial("id").primaryKey(),
   groupId: int("group_id"),
   address: varchar("address", { length: 255 }),
   city: varchar("city", { length: 255 }),
   county: varchar("state", { length: 255 }),
-  postCode: varchar("post_code", { length: 8 }).notNull(),
+  postCode: varchar("post_code", { length: 8 }),
   country: varchar("country", { length: 255 }).default("United Kingdom"),
   active: boolean("active").notNull().default(true),
 
@@ -28,16 +28,16 @@ export const address = mysqlTable("address", {
 })
 
 // relations (many to one)
-export const groupAddressRelations = relations(address, ({ one }) => ({
+export const groupAddressRelations = relations(addresses, ({ one }) => ({
   group: one(groups, {
-    fields: [address.groupId],
+    fields: [addresses.groupId],
     references: [groups.id],
   }),
 }))
 
 // zod schemas for validation
-export const selectAddressSchema = createSelectSchema(address)
-export const insertAddressSchema = createInsertSchema(address, {
+export const selectAddressSchema = createSelectSchema(addresses)
+export const insertAddressSchema = createInsertSchema(addresses, {
   postCode: z
     // Overriding the postcode field validation as UK postcodes are complex
     .custom<string>((value) => {
@@ -50,4 +50,4 @@ export const insertAddressSchema = createInsertSchema(address, {
     .transform((value) => toNormalised(value)),
 })
 
-export default address
+export default addresses
