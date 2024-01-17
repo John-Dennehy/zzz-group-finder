@@ -10,7 +10,7 @@ export default async function AdminPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-lg text-primary">Root Admin Page</h1>
+      <h1 className="text-lg text-primary">/admin/page.tsx</h1>
       {/* <NewGroupModal /> */}
       {/* <pre>{JSON.stringify(res, null, 2)}</pre> */}
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}

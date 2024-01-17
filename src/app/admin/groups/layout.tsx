@@ -1,16 +1,12 @@
 type Props = {
-	children: React.ReactNode,
+	children: React.ReactNode
 }
 
 export default async function GroupsLayout(props: Props) {
 	return (
 		<>
-			<p>GroupsLayout</p>
-
-
+			<p>/admin/groups/layout.tsx</p>
 			{props.children}
-
-
 		</>
 	)
 }

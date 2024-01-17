@@ -33,13 +33,15 @@ export default async function GroupsPage() {
 
   // TODO fix table
   return (
-    <>
-      <CreateGroupForm />
-      <h1>Groups Page</h1>
+    <div
+      className="border-2 rounded-md p-4"
+    >
+      <h1>/admin/groups/page.tsx</h1>
       <h1>Create Group Form</h1>
+      <CreateGroupForm />
       <GroupTable groups={items}
 
       />
-    </>
+    </div>
   )
 }
