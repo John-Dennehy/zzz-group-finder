@@ -19,12 +19,6 @@ type Props = {
 
 export function UpdateGroupActiveStatusForm({ group }: Props) {
 	const [ state, formAction ] = useFormState(updateGroupAction, initialState)
-	const [ optimisticState, addOptimistic ] = useOptimistic(
-		group.active,
-		// updateFn
-		(currentState, optimisticValue) => { return !currentState },
-
-	);
 	const { pending } = useFormStatus();
 
 	const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +43,7 @@ export function UpdateGroupActiveStatusForm({ group }: Props) {
 			<form action={handleSetStatus}>
 				<input type="hidden" name="id" value={group.id} />
 				<input type="hidden" name="active" value={`${!group.active}`} />
-				<Checkbox isSelected={optimisticState} type="submit" aria-disabled={pending} isDisabled={pending} onChange={handleCheckboxChange} />
+				<Checkbox isSelected={group.active} type="submit" aria-disabled={pending} isDisabled={pending} onChange={handleCheckboxChange} />
 			</form>
 		</>
 	);
