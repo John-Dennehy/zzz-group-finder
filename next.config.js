@@ -7,6 +7,11 @@ const nextConfig = {
       { hostname: "i.pinimg.com" },
     ],
   },
-};
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+}
 
 module.exports = nextConfig;
