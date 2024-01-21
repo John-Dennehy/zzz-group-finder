@@ -8,11 +8,11 @@ import { useAction } from "next-safe-action/hooks";
 
 import { Dispatch, SetStateAction } from "react"
 import { Control, useForm } from "react-hook-form"
-import { Input } from "../ui/input"
-import { Checkbox } from "../ui/checkbox"
-import { Textarea } from "../ui/textarea"
+import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Textarea } from "@/components/ui/textarea"
 import createGroupAction from "@/server/create-group-action"
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 
 // used to indicate the status of the form submission. To be updated by the formAction
 export const initialState: FormActionState = {
