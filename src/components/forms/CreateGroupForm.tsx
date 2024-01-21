@@ -1,7 +1,7 @@
 "use client"
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { InferredGroupValues, insertGroupZodSchema } from "@/db/schema"
+import { InferredGroupValues, insertGroupZodSchema } from "@/data/schema"
 import { FormActionState } from "@/utils/utility-types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAction } from "next-safe-action/hooks";
@@ -11,7 +11,7 @@ import { Control, useForm } from "react-hook-form"
 import { Input } from "../ui/input"
 import { Checkbox } from "../ui/checkbox"
 import { Textarea } from "../ui/textarea"
-import createGroupAction from "@/actions/create-group-action"
+import createGroupAction from "@/server/create-group-action"
 import { Button } from "../ui/button"
 
 // used to indicate the status of the form submission. To be updated by the formAction

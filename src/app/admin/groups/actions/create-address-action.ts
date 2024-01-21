@@ -1,7 +1,7 @@
 "use server"
 
-import { insertAddressSchema } from "@/db/schema"
-import { insertAddress } from "@/services/address"
+import { insertAddressSchema } from "@/data/schema"
+import { insertAddress } from "@/server/address"
 import { revalidatePath, revalidateTag } from "next/cache"
 
 export async function createAddressAction(prevState: unknown, formData: FormData) {

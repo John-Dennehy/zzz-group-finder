@@ -1,5 +1,5 @@
 "use server"
-import { deleteGroup } from "@/services/groups"
+import { deleteGroup } from "@/server/groups"
 import { FormActionState } from "@/utils/utility-types"
 import { handleError, handleSuccess } from "./action-utils"
 

@@ -1,8 +1,8 @@
 import { InferInsertModel, InferSelectModel, relations, sql } from "drizzle-orm"
 import { boolean, int, mysqlEnum, serial, time, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
+import { groupsTable } from "."
 import { weekdays } from "../../utils/week-days"
-import { groupsTable } from "../schema"
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
 import { groupfinderTable as mysqlTable } from "../utils"

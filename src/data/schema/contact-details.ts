@@ -1,7 +1,7 @@
 import { relations, sql } from "drizzle-orm"
 import { boolean, int, mysqlEnum, serial, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
-import { groupsTable } from "../schema"
+import { groupsTable } from "."
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
 import { groupfinderTable as mysqlTable } from "../utils"

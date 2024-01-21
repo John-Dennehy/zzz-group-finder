@@ -1,6 +1,6 @@
 "use server"
-import { insertGroupZodSchema } from "@/db/schema"
-import { updateGroup } from "@/services/groups"
+import { insertGroupZodSchema } from "@/data/schema"
+import { updateGroup } from "@/server/groups"
 import { FormActionState } from "@/utils/utility-types"
 import { getFormattedFormData, handleError, handleSuccess } from "./action-utils"
 

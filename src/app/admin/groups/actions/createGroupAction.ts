@@ -1,6 +1,6 @@
 "use server"
-import { InferredGroupValues, insertGroupZodSchema } from "@/db/schema"
-import { insertGroup } from "@/services/groups"
+import { InferredGroupValues, insertGroupZodSchema } from "@/data/schema"
+import { insertGroup } from "@/server/groups"
 import { FormActionState } from "@/utils/utility-types"
 import { getFormattedFormData, handleError, handleSuccess } from "./action-utils"
 

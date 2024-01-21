@@ -1,5 +1,5 @@
-import { db } from "@/db"
-import { groupsTable, selectGroupZodSchema } from "@/db/schema"
+import { db } from "@/data"
+import { groupsTable, selectGroupZodSchema } from "@/data/schema"
 
 export default async function AdminPage() {
   const result = await db.select().from(groupsTable)

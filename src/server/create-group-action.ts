@@ -1,8 +1,8 @@
 "use server"
 
-import { db } from "@/db"
-import { groupsTable, insertGroupZodSchema } from "@/db/schema"
-import { serverActionClient } from "@/utils/safe-sever-actions"
+import { db } from "@/data"
+import { groupsTable, insertGroupZodSchema } from "@/data/schema"
+import { serverActionClient } from "@/server/safe-sever-actions"
 import { revalidatePath } from "next/cache"
 
 const schema = insertGroupZodSchema

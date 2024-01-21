@@ -1,12 +1,12 @@
 import { relations, sql } from "drizzle-orm"
 import { boolean, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
+import { contactDetailsTable, openHoursTable } from "."
 import { createPublicId } from "../../utils/create-public-id"
-import { contactDetailsTable, openHoursTable } from "../schema"
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
-import { groupfinderTable as mysqlTable } from "../utils"
 import { z } from "zod"
+import { groupfinderTable as mysqlTable } from "../utils"
 
 // drizzle schema for groups table
 export const groupsTable = mysqlTable("groups", {

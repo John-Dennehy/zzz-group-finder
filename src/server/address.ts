@@ -1,5 +1,5 @@
-import { db } from "@/db"
-import { addressesTable } from "@/db/schema"
+import { db } from "@/data"
+import { addressesTable } from "@/data/schema"
 
 type Address = typeof addressesTable.$inferInsert
 

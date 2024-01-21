@@ -1,6 +1,6 @@
 "use client"
 
-import { SelectGroup } from "@/db/schema"
+import { SelectGroup } from "@/data/schema"
 import formatDate from "@/utils/format-date"
 import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip } from "@nextui-org/react"
 import type { ColumnSize } from "@/utils/utility-types"
@@ -8,7 +8,7 @@ import React from "react"
 import Link from "next/link"
 import { EyeIcon } from "./svg/EyeIcon"
 import { EditIcon } from "./svg/EditIcon"
-import { Group } from "@/services/groups"
+import { Group } from "@/server/groups"
 import { DeleteGroupForm } from "./forms/DeleteGroupForm"
 import { UpdateGroupActiveStatusForm } from "./forms/UpdateGroupActiveStatusForm"
 
