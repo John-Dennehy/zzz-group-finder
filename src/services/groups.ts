@@ -1,20 +1,20 @@
 import { db } from "@/db"
-import { groups } from "@/db/schema"
+import { groupsTable } from "@/db/schema"
 import { eq } from "drizzle-orm"
 
-export type NewGroup = typeof groups.$inferInsert
-export type Group = typeof groups.$inferSelect
+export type NewGroup = typeof groupsTable.$inferInsert
+export type Group = typeof groupsTable.$inferSelect
 
 export const selectAllGroups = async (id: string) => {
-  return await db.query.groups.findMany()
+  return await db.query.groupsTable.findMany()
 }
 
 export const insertGroup = async (group: NewGroup) => {
-  return await db.insert(groups).values(group)
+  return await db.insert(groupsTable).values(group)
 }
 
 export const deleteGroup = async (id: string) => {
-  return await db.delete(groups).where(eq(groups.id, id))
+  return await db.delete(groupsTable).where(eq(groupsTable.id, id))
 }
 
 export const updateGroup = async (group: Partial<NewGroup>) => {
@@ -23,7 +23,7 @@ export const updateGroup = async (group: Partial<NewGroup>) => {
   }
 
   return await db
-    .update(groups)
+    .update(groupsTable)
     .set({ ...group })
-    .where(eq(groups.id, group.id))
+    .where(eq(groupsTable.id, group.id))
 }

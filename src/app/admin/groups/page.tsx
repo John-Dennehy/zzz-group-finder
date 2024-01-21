@@ -1,12 +1,12 @@
 import db from "@/db/connection"
-import { selectGroupSchema } from "@/db/schema"
+import { selectGroupZodSchema } from "@/db/schema"
 
 import { GroupTable } from "@/components/GroupTable"
-import { CreateGroupForm } from "@/components/forms/CreateGroupForm"
+import { CreateGroupFormModal } from "@/components/forms/CreateGroupFormModal"
 
 
 export default async function GroupsPage() {
-  const response = await db.query.groups.findMany()
+  const response = await db.query.groupsTable.findMany()
 
   if (!response) {
     return <div>loading...</div>
@@ -20,7 +20,7 @@ export default async function GroupsPage() {
   const items = await response
     .map((group) => {
       // validate response with zod
-      const validatedGroup = selectGroupSchema.safeParse(group)
+      const validatedGroup = selectGroupZodSchema.safeParse(group)
 
       if (validatedGroup.success === false) {
         console.error(validatedGroup.error)
@@ -38,7 +38,7 @@ export default async function GroupsPage() {
     >
       <h1>/admin/groups/page.tsx</h1>
       <h1>Create Group Form</h1>
-      <CreateGroupForm />
+      <CreateGroupFormModal />
       <GroupTable groups={items}
 
       />

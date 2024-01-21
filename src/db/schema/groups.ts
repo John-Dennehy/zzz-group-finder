@@ -2,14 +2,14 @@ import { relations, sql } from "drizzle-orm"
 import { boolean, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { createPublicId } from "../../utils/create-public-id"
-import { contactDetails, openHours } from "../schema"
+import { contactDetailsTable, openHoursTable } from "../schema"
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
 import { groupfinderTable as mysqlTable } from "../utils"
 import { z } from "zod"
 
 // drizzle schema for groups table
-export const groups = mysqlTable("groups", {
+export const groupsTable = mysqlTable("groups", {
   id: varchar("id", { length: 6 })
     .primaryKey()
     .$defaultFn(() => createPublicId()),
@@ -30,14 +30,14 @@ export const groups = mysqlTable("groups", {
 })
 
 // relations (one to many)
-export const groupRelations = relations(groups, ({ many }) => ({
-  groupOpenHours: many(openHours),
-  groupContactDetails: many(contactDetails),
+export const groupRelations = relations(groupsTable, ({ many }) => ({
+  groupOpenHours: many(openHoursTable),
+  groupContactDetails: many(contactDetailsTable),
 }))
 
 // zod schemas for validation
-export const selectGroupSchema = createSelectSchema(groups)
-export const insertGroupSchema = createInsertSchema(groups, {
+export const selectGroupZodSchema = createSelectSchema(groupsTable)
+export const insertGroupZodSchema = createInsertSchema(groupsTable, {
   name: (schema) =>
     schema.name
       .min(1, { message: "Name must be at least 1 character long" })
@@ -53,7 +53,9 @@ export const insertGroupSchema = createInsertSchema(groups, {
 })
 
 // Inferred Types
-export type SelectGroup = typeof groups.$inferSelect
-export type InsertGroup = typeof groups.$inferInsert
+export type InferredGroupValues = z.infer<typeof insertGroupZodSchema>
 
-export default groups
+export type SelectGroup = typeof groupsTable.$inferSelect
+export type InsertGroup = typeof groupsTable.$inferInsert
+
+export default groupsTable

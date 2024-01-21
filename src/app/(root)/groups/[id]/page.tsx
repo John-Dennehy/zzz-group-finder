@@ -1,11 +1,11 @@
 import db from "@/db/connection"
-import { groups } from "@/db/schema"
+import { groupsTable } from "@/db/schema"
 import formatDate from "@/utils/format-date"
 import { eq } from "drizzle-orm"
 
 export default async function GroupPage({ params }: { params: { id: string } }) {
-	const data = await db.query.groups.findFirst({
-		where: eq(groups.id, params.id),
+	const data = await db.query.groupsTable.findFirst({
+		where: eq(groupsTable.id, params.id),
 	})
 	if (!data) return <div>loading...</div>
 

@@ -1,11 +1,11 @@
 import { db } from "@/db"
-import { groups, selectGroupSchema } from "@/db/schema"
+import { groupsTable, selectGroupZodSchema } from "@/db/schema"
 
 export default async function AdminPage() {
-  const result = await db.select().from(groups)
+  const result = await db.select().from(groupsTable)
 
   //  validate response with zod
-  const data = selectGroupSchema.safeParse(result)
+  const data = selectGroupZodSchema.safeParse(result)
   console.log(data)
 
   return (
