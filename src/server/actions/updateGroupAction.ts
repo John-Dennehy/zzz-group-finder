@@ -1,8 +1,8 @@
 "use server"
-import { insertGroupZodSchema } from "@/data/schema"
-import { updateGroup } from "@/server/groups"
+import { insertGroupZodSchema } from "@/server/data/schema"
+import { updateGroup } from "@/server/queries/groups"
 import { FormActionState } from "@/utils/utility-types"
-import { getFormattedFormData, handleError, handleSuccess } from "./action-utils"
+import { getFormattedFormData, handleError, handleSuccess } from "./utils/action-utils"
 
 export async function updateGroupAction(prevState: FormActionState, formData: FormData) {
   const data = getFormattedFormData(formData)

@@ -1,7 +1,7 @@
 "use server"
-import { deleteGroup } from "@/server/groups"
+import { deleteGroup } from "@/server/queries/groups"
 import { FormActionState } from "@/utils/utility-types"
-import { handleError, handleSuccess } from "./action-utils"
+import { handleError, handleSuccess } from "./utils/action-utils"
 
 export async function deleteGroupAction(prevState: FormActionState, formData: FormData) {
   const groupId = formData.get("id")

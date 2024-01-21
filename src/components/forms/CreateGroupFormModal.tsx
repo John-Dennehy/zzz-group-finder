@@ -1,6 +1,6 @@
 "use client"
 
-import { createGroupFormAction } from "@/app/admin/groups/actions/createGroupAction"
+import { createGroupFormAction } from "@/server/actions/createGroupAction"
 import { useState } from "react"
 import { useFormState } from "react-dom"
 import { CreateGroupForm, initialState } from "./CreateGroupForm"

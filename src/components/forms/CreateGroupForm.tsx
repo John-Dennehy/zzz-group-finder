@@ -1,7 +1,7 @@
 "use client"
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { InferredGroupValues, insertGroupZodSchema } from "@/data/schema"
+import { InferredGroupValues, insertGroupZodSchema } from "@/server/data/schema"
 import { FormActionState } from "@/utils/utility-types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAction } from "next-safe-action/hooks";
@@ -11,7 +11,7 @@ import { Control, useForm } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
-import createGroupAction from "@/server/create-group-action"
+import createGroupAction from "@/server/actions/create-group-action"
 import { Button } from "@/components/ui/button"
 
 // used to indicate the status of the form submission. To be updated by the formAction
@@ -19,28 +19,6 @@ export const initialState: FormActionState = {
 	isSuccess: null,
 	message: "",
 }
-
-const formSteps = [
-	{
-		order: 0,
-		name: "Group",
-		fields: [ "name", "description", "logoUrl", "active" ],
-	},
-	{
-		order: 1,
-		name: "Opening Hours",
-		fields: [ "openingHours" ],
-	},
-	{
-		order: 2,
-		name: "Location",
-		fields: [ "location" ],
-	},
-	{
-		order: 99,
-		name: "Complete",
-	},
-]
 
 export function CreateGroupForm({
 	formAction,

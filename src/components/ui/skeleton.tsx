@@ -1,4 +1,4 @@
-import { cn } from "@/styles/ui"
+import { cn } from "@/app/styles/ui"
 
 function Skeleton({
   className,

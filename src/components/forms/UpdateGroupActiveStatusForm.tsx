@@ -1,9 +1,9 @@
 "use client";
 import { Checkbox } from "@nextui-org/react";
 import { ChangeEvent, useOptimistic } from "react";
-import { Group } from "@/server/groups";
+import { Group } from "@/server/queries/groups";
 import { FormActionState } from "@/utils/utility-types";
-import { updateGroupAction } from "@/app/admin/groups/actions/updateGroupAction";
+import { updateGroupAction } from "@/server/actions/updateGroupAction";
 import { useFormState, useFormStatus } from "react-dom";
 
 

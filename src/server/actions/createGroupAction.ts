@@ -1,8 +1,8 @@
 "use server"
-import { InferredGroupValues, insertGroupZodSchema } from "@/data/schema"
-import { insertGroup } from "@/server/groups"
+import { InferredGroupValues, insertGroupZodSchema } from "@/server/data/schema"
+import { insertGroup } from "@/server/queries/groups"
 import { FormActionState } from "@/utils/utility-types"
-import { getFormattedFormData, handleError, handleSuccess } from "./action-utils"
+import { getFormattedFormData, handleError, handleSuccess } from "./utils/action-utils"
 
 export async function createGroupFormAction(prevState: FormActionState, formData: FormData) {
   const data = getFormattedFormData(formData)

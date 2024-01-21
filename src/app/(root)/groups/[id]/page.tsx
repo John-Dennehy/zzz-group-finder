@@ -1,5 +1,5 @@
-import db from "@/data/connection"
-import { groupsTable } from "@/data/schema"
+import db from "@/server/data/connection"
+import { groupsTable } from "@/server/data/schema"
 import formatDate from "@/utils/format-date"
 import { eq } from "drizzle-orm"
 

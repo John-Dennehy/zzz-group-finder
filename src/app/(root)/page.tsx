@@ -1,3 +1,5 @@
+import NewGroupForm from "@/components/forms/new-group-form"
+
 type PageProps = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
@@ -56,7 +58,9 @@ export default async function Home({ searchParams }: PageProps) {
           </li>
         ))}
       </ul> */}
-      Hello World
+      <h1>Hello World</h1>
+
+      {/* <NewGroupForm /> */}
       {/* <pre>
         <code>{JSON.stringify(allGroups, null, 2)}</code>
       </pre> */}

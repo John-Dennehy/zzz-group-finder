@@ -1,5 +1,7 @@
-import { db } from "@/data"
-import { groupsTable } from "@/data/schema"
+"use server"
+
+import { db } from "@/server/data"
+import { groupsTable } from "@/server/data/schema"
 import { eq } from "drizzle-orm"
 
 export type NewGroup = typeof groupsTable.$inferInsert

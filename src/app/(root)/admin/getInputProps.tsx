@@ -1,4 +1,4 @@
-import { InsertGroup } from "@/data/schema/groups"
+import { InsertGroup } from "@/server/data/schema/groups"
 import { InputProps } from "@nextui-org/react"
 
 import { FormState, UseFormRegister } from "react-hook-form"
@@ -22,8 +22,8 @@ export function getInputProps(
       ...register(fieldName, {
         required: fieldProps.isRequired ? `${fieldName} is required` : false,
       }),
-      isInvalid: formState.errors[fieldName] ? true : false,
-      errorMessage: formState.errors[fieldName]?.message,
+      isInvalid: formState.errors[ fieldName ] ? true : false,
+      errorMessage: formState.errors[ fieldName ]?.message,
       // ...fieldProps,
       name: fieldName,
       label: fieldProps.label || fieldName,

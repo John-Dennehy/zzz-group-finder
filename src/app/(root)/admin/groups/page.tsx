@@ -1,5 +1,5 @@
-import db from "@/data/connection"
-import { selectGroupZodSchema } from "@/data/schema"
+import db from "@/server/data/connection"
+import { selectGroupZodSchema } from "@/server/data/schema"
 
 import { GroupTable } from "@/components/GroupTable"
 import { CreateGroupFormModal } from "@/components/forms/CreateGroupFormModal"

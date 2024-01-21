@@ -1,8 +1,8 @@
+import { createPublicId } from "@/utils/create-public-id"
 import { relations, sql } from "drizzle-orm"
 import { boolean, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
 import { contactDetailsTable, openHoursTable } from "."
-import { createPublicId } from "../../utils/create-public-id"
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
 import { z } from "zod"
