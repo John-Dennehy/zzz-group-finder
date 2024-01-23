@@ -9,7 +9,7 @@ import { groupfinderTable as mysqlTable } from "../utils"
 // drizzle schema for open_hours table
 export const openHoursTable = mysqlTable("group_open_hours", {
   id: serial("id").primaryKey(),
-  groupId: int("group_id"),
+  groupId: varchar("group_id", { length: 6 }), //.references(() => groupsTable.id),
   weekday: mysqlEnum("weekday", weekdays).notNull(),
   start: time("start").notNull(),
   end: time("end").notNull(),

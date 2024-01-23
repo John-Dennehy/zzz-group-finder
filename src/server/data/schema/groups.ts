@@ -1,18 +1,16 @@
+import { contactDetailsTable, openHoursTable } from "@/server/data/schema"
 import { createPublicId } from "@/utils/create-public-id"
 import { relations, sql } from "drizzle-orm"
 import { boolean, text, timestamp, varchar } from "drizzle-orm/mysql-core"
 import { createInsertSchema, createSelectSchema } from "drizzle-zod"
-import { contactDetailsTable, openHoursTable } from "."
+import { z } from "zod"
 
 // Import custom version of drizzle's mysqlTableCreator that adds `groupfinder_` prefix to all table names
-import { z } from "zod"
-import { groupfinderTable as mysqlTable } from "../utils"
+import { groupfinderTable as mysqlTable } from "@/server/data/utils"
 
 // drizzle schema for groups table
 export const groupsTable = mysqlTable("groups", {
-  id: varchar("id", { length: 6 })
-    .primaryKey()
-    .$defaultFn(() => createPublicId()),
+  id: varchar("id", { length: 6 }).primaryKey().$defaultFn(createPublicId),
   name: varchar("name", { length: 256 }).notNull(),
   description: text("description"),
   logoUrl: varchar("logo_url", { length: 256 }),
@@ -35,9 +33,9 @@ export const groupRelations = relations(groupsTable, ({ many }) => ({
   groupContactDetails: many(contactDetailsTable),
 }))
 
-// zod schemas for validation
-export const selectGroupZodSchema = createSelectSchema(groupsTable)
-export const insertGroupZodSchema = createInsertSchema(groupsTable, {
+// drizzle-zod validation schemas
+export const selectGroupSchema = createSelectSchema(groupsTable)
+export const insertGroupSchema = createInsertSchema(groupsTable, {
   name: (schema) =>
     schema.name
       .min(1, { message: "Name must be at least 1 character long" })
@@ -51,11 +49,5 @@ export const insertGroupZodSchema = createInsertSchema(groupsTable, {
   verifiedAt: (schema) => schema.verifiedAt.optional(),
   active: (schema) => schema.active.default(false),
 })
-
-// Inferred Types
-export type InferredGroupValues = z.infer<typeof insertGroupZodSchema>
-
-export type SelectGroup = typeof groupsTable.$inferSelect
-export type InsertGroup = typeof groupsTable.$inferInsert
 
 export default groupsTable

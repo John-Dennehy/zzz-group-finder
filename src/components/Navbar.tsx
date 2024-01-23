@@ -19,7 +19,7 @@ import { AcmeLogo } from "@/components/svg/AcmeLogo"
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const menuItems: string[] = []
+  const menuItems = [ { label: "Admin", href: "/admin" } ]
 
   return (
     <NextuiNavbar
@@ -65,10 +65,10 @@ export default function Navbar() {
                     ? "danger"
                     : "foreground"
               }
-              href="#"
+              href={item.href}
               size="lg"
             >
-              {item}
+              {item.label}
             </Link>
           </NavbarMenuItem>
         ))}

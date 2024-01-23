@@ -1,5 +1,5 @@
 "use server"
-import { InferredGroupValues, insertGroupZodSchema } from "@/server/data/schema"
+import { InferredGroupValues, insertGroupSchema } from "@/server/data/schema"
 import { insertGroup } from "@/server/queries/groups"
 import { FormActionState } from "@/utils/utility-types"
 import { getFormattedFormData, handleError, handleSuccess } from "./utils/action-utils"
@@ -7,7 +7,7 @@ import { getFormattedFormData, handleError, handleSuccess } from "./utils/action
 export async function createGroupFormAction(prevState: FormActionState, formData: FormData) {
   const data = getFormattedFormData(formData)
 
-  const parsedGroup = insertGroupZodSchema.safeParse(data)
+  const parsedGroup = insertGroupSchema.safeParse(data)
 
   if (!parsedGroup.success) return handleError("Error parsing form data")
 

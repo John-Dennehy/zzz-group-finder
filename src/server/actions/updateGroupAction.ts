@@ -1,12 +1,12 @@
 "use server"
-import { insertGroupZodSchema } from "@/server/data/schema"
+import { insertGroupSchema } from "@/server/data/schema"
 import { updateGroup } from "@/server/queries/groups"
 import { FormActionState } from "@/utils/utility-types"
 import { getFormattedFormData, handleError, handleSuccess } from "./utils/action-utils"
 
 export async function updateGroupAction(prevState: FormActionState, formData: FormData) {
   const data = getFormattedFormData(formData)
-  const parsedGroup = insertGroupZodSchema.partial().safeParse(data)
+  const parsedGroup = insertGroupSchema.partial().safeParse(data)
 
   // Error parsing form data
   if (!parsedGroup.success) return handleError("Error parsing form data")

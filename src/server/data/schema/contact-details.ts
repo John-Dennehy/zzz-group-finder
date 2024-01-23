@@ -11,7 +11,7 @@ const contactTypes = ["email", "phone", "text", "facebook", "website", "whatsapp
 // drizzle schema for contact_details table
 export const contactDetailsTable = mysqlTable("contact_details", {
   id: serial("id").primaryKey(),
-  groupId: int("group_id"),
+  groupId: varchar("group_id", { length: 6 }), //.references(() => groupsTable.id),
   contactType: mysqlEnum("contact_type", contactTypes).notNull(),
   contactValue: varchar("contact_value", { length: 255 }).notNull(),
   forInformation: boolean("for_information").notNull().default(true),

@@ -1,7 +1,7 @@
 "use client"
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { InferredGroupValues, insertGroupZodSchema } from "@/server/data/schema"
+import { InferredGroupValues, insertGroupSchema } from "@/server/data/schema"
 import { FormActionState } from "@/utils/utility-types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAction } from "next-safe-action/hooks";
@@ -32,7 +32,7 @@ export function CreateGroupForm({
 	setIsActive?: Dispatch<SetStateAction<"true" | undefined>>
 }) {
 	const form = useForm<InferredGroupValues>({
-		resolver: zodResolver(insertGroupZodSchema),
+		resolver: zodResolver(insertGroupSchema),
 	})
 	const { execute, result } = useAction(createGroupAction);
 

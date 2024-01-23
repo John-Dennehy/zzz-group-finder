@@ -14,7 +14,7 @@ import { groupfinderTable as mysqlTable } from "../utils"
 // drizzle schema for address table
 export const addressesTable = mysqlTable("addresses", {
   id: serial("id").primaryKey(),
-  groupId: int("group_id"),
+  groupId: varchar("group_id", { length: 6 }), //.references(() => groupsTable.id),
   address: varchar("address", { length: 255 }),
   city: varchar("city", { length: 255 }),
   county: varchar("state", { length: 255 }),

@@ -60,7 +60,7 @@ export default async function Home({ searchParams }: PageProps) {
       </ul> */}
       <h1>Hello World</h1>
 
-      {/* <NewGroupForm /> */}
+      <NewGroupForm />
       {/* <pre>
         <code>{JSON.stringify(allGroups, null, 2)}</code>
       </pre> */}

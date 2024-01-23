@@ -1,5 +1,5 @@
 import db from "@/server/data/connection"
-import { selectGroupZodSchema } from "@/server/data/schema"
+import { selectGroupSchema } from "@/server/data/schema"
 
 import { GroupTable } from "@/components/GroupTable"
 import { CreateGroupFormModal } from "@/components/forms/CreateGroupFormModal"
@@ -20,7 +20,7 @@ export default async function GroupsPage() {
   const items = await response
     .map((group) => {
       // validate response with zod
-      const validatedGroup = selectGroupZodSchema.safeParse(group)
+      const validatedGroup = selectGroupSchema.safeParse(group)
 
       if (validatedGroup.success === false) {
         console.error(validatedGroup.error)
