@@ -83,7 +83,7 @@ export default function NewGroupForm({
           const getProps = (field: ControllerRenderProps) => {
             let props = { ...componentProps }
 
-            //	add props that require `field` for Checkbox
+            //	add additional props that require `field` value for Checkbox
             if (Component === Checkbox)
               props = {
                 ...componentProps,
