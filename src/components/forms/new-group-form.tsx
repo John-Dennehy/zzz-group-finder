@@ -12,6 +12,7 @@ import { Button } from "../ui/button"
 import { Checkbox } from "../ui/checkbox"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
+import { toast } from "sonner"
 
 const newGroupFormMap: FormMap = {
   fields: [
@@ -68,11 +69,13 @@ export default function NewGroupForm({
   })
 
   const handleValid = (values: typeof validationSchema) => {
-    alert(`valid submit: ${JSON.stringify(values)}`)
+    //	TODO: handle form submission
+    toast.success("Group created successfully")
   }
 
-  const handleInvalid = () => {
-    alert("invalid submit")
+	const handleInvalid = () => {
+    // TODO: handle form submission error
+    toast.error("Group creation failed")
   }
   return (
     <Form {...form}>

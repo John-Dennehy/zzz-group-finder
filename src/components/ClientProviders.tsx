@@ -3,6 +3,7 @@
 import { NextUIProvider } from "@nextui-org/react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { useRouter } from "next/navigation"
+import { Toaster } from "@/components/ui/sonner"
 import { ReactNode } from "react"
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -10,6 +11,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider attribute="class" defaultTheme="light">
+        <Toaster richColors />
         {children}
       </NextThemesProvider>
     </NextUIProvider>
