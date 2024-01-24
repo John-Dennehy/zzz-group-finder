@@ -14,10 +14,8 @@ export const groupsTable = mysqlTable("groups", {
   name: varchar("name", { length: 256 }).notNull(),
   description: text("description"),
   logoUrl: varchar("logo_url", { length: 256 }),
-
   verifiedAt: timestamp("verified_at"),
   active: boolean("active").default(false).notNull(),
-
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
@@ -36,13 +34,13 @@ export const groupRelations = relations(groupsTable, ({ many }) => ({
 // drizzle-zod validation schemas
 export const selectGroupSchema = createSelectSchema(groupsTable)
 export const insertGroupSchema = createInsertSchema(groupsTable, {
-  name: (schema) =>
-    schema.name
+  name: ({ name }) =>
+    name
       .min(1, { message: "Name must be at least 1 character long" })
       .max(256, { message: "Name must be less than 256 characters long" }),
-  logoUrl: (schema) =>
-    schema.logoUrl
-      .url({ message: "That's not a URL!" })
+  logoUrl: ({ logoUrl }) =>
+    logoUrl
+      .url({ message: "That's not a  valid URL" })
       // needed to make optional URLS work as intended, as zod creator wont listen to user feedback
       .or(z.literal("")),
   description: (schema) => schema.description.max(1024).optional(),
