@@ -1,14 +1,5 @@
 {
-  "cSpell.words": [
-    "catppuccin",
-    "datetime",
-    "groupfinder",
-    "hookform",
-    "nextui",
-    "planetscale",
-    "valibot",
-    "varchar"
-  ],
+  "cSpell.words": ["catppuccin", "datetime", "groupfinder", "hookform", "nextui", "planetscale", "sonner", "valibot", "varchar"],
   "css.customData": [".vscode/tailwind.json"],
   "files.associations": {
     "*.css": "tailwindcss"
